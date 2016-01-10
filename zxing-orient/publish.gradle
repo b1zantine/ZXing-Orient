@@ -1,0 +1,45 @@
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+task generateJavaDocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavaDocsJar.dependsOn generateJavadocs
+
+artifacts {
+//    archives generateJavaDocsJar
+    archives generateSourcesJar
+}
+
+group = 'me.sudar'
+version = '1.0.0'
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty('BINTRAY_USER')
+    key = properties.getProperty('BINTRAY_KEY')
+    pkg {
+        repo = 'maven'
+        name = 'ZXing Orient'
+
+        version {
+            name = '1.0.0'
+            released  = new Date()
+            vcsTag = '1.0.0'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/SudarAbisheck/ZXing-Orient.git'
+        websiteUrl = 'https://github.com/SudarAbisheck/ZXing-Orient'
+    }
+    configurations = ['archives']
+}
