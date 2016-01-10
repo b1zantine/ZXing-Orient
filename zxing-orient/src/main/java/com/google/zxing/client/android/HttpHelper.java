@@ -64,7 +64,7 @@ public final class HttpHelper {
    * @param type expected text-like MIME type of that content
    * @return content as a {@code String}
    * @throws IOException if the content can't be retrieved because of a bad URI, network problem, etc.
-   * @see #downloadViaHttp(String, HttpHelper.ContentType, int)
+   * @see #downloadViaHttp(String, ContentType, int)
    */
   public static CharSequence downloadViaHttp(String uri, ContentType type) throws IOException {
     return downloadViaHttp(uri, type, Integer.MAX_VALUE);
