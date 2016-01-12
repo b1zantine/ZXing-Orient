@@ -27,7 +27,7 @@
       android:layout_height="fill_parent"/>
   
   <LinearLayout
-      android:id="@+id/custom_action_bar"
+      android:id="@+id/options_tool_bar"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:background="@color/actionbar_bg"

@@ -28,6 +28,6 @@
   <color name="viewfinder_mask">#60000000</color>
   
   <color name="viewfinder_corner">#ffff0000</color>
-  <color name="actionbar_bg">#ff0000ff</color>
+  <color name="actionbar_bg">#3F51B5</color>
   <color name="actionbar_text">#ffffffff</color>  <!--  #argb ada pavigala -->
 </resources>

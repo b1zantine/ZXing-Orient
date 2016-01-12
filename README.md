@@ -6,12 +6,6 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) (v.3
 ## 1. Provide the gradle dependency
 
 ```gradle
-repositories {
-    maven {
-        url 'https://dl.bintray.com/sudarabisheck/maven'
-    }
-}
-
 compile 'me.sudar:zxing-orient:1.0.0@aar'
 ```
 
@@ -19,16 +13,16 @@ compile 'me.sudar:zxing-orient:1.0.0@aar'
 
 ```xml
 <activity
-            android:name="com.google.zxing.client.android.CaptureActivity"
-            android:configChanges="keyboardHidden"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+    android:name="com.google.zxing.client.android.CaptureActivity"
+    android:configChanges="keyboardHidden"
+    android:windowSoftInputMode="stateAlwaysHidden" >
 
-            <intent-filter>
-                <action android:name="com.google.zxing.client.android.ZXSCAN" />
+    <intent-filter>
+        <action android:name="com.google.zxing.client.android.ZXSCAN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
 ```
 
 ## 3. Create an Intent
