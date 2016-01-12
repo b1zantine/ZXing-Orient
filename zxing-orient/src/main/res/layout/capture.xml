@@ -25,65 +25,76 @@
       android:id="@+id/viewfinder_view"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"/>
-  
-  <LinearLayout
-      android:id="@+id/options_tool_bar"
-      android:layout_width="fill_parent"
+
+  <RelativeLayout
+      android:id="@+id/custom_action_bar"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/actionbar_bg"
-      android:orientation="horizontal"
-      android:paddingTop="5dp" 
-      android:paddingBottom="5dp" 
-      android:paddingRight="5dp" 
+      android:paddingTop="5dp"
+      android:paddingBottom="5dp"
+      android:paddingRight="5dp"
       android:paddingLeft="20dp">
+      <LinearLayout
+          android:id="@+id/options_tool_bar"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true">
 
-      <ImageView
-          android:id="@+id/logo_image"
-          android:layout_width="44dp"
-          android:layout_height="44dp"
-          android:gravity="start"
-          android:src="@drawable/launcher_icon"
-          tools:ignore="ContentDescription" />
+          <ImageView
+              android:id="@+id/logo_image"
+              android:layout_width="44dp"
+              android:layout_height="44dp"
+              android:gravity="start"
+              android:src="@drawable/ic_launcher"
+              tools:ignore="ContentDescription" />
 
-      <Space
-          android:layout_width="0dp"
-          android:layout_height="match_parent" 
-          android:layout_weight="1"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:paddingLeft="10dp"
+              android:gravity="center_vertical"
+              android:text="@string/app_name"
+              android:textSize="18sp"
+              android:textStyle="bold"
+              android:textColor="@color/actionbar_text"/>
+      </LinearLayout>
 
       <LinearLayout 
-          android:layout_width="wrap_content"
-          android:layout_height="fill_parent"
-          android:orientation="horizontal" 
-          android:layout_gravity="end"
-          android:gravity="center"
-          style="?android:attr/buttonBarStyle">
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:gravity="end">
           
-          <Button 
+          <com.mikepenz.iconics.view.IconicsButton
               android:id="@+id/autofocus_toggle_button"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/autofocus_on_string"
+              android:text="@string/autofocus_on_icon"
               android:gravity="center"
-              android:textSize="14sp"
+              android:textSize="24sp"
               android:textColor="@color/actionbar_text"
               android:paddingRight="10dp"
               style="?android:attr/buttonBarButtonStyle" />
 
-          <Button
+          <com.mikepenz.iconics.view.IconicsButton
               android:id="@+id/flash_toggle_button"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/flash_off_string" 
+              android:text="@string/flash_off_icon"
               android:gravity="center"
-              android:textSize="14sp"
+              android:textSize="24sp"
               android:textColor="@color/actionbar_text"
-              android:paddingLeft="10dp"
               android:paddingRight="20dp"
               style="?android:attr/buttonBarButtonStyle"/>
 
-      </LinearLayout> 
-      
-  </LinearLayout> 
+      </LinearLayout>
+  </RelativeLayout>
 
   <LinearLayout android:id="@+id/result_view"
                 android:orientation="vertical"
@@ -252,15 +263,22 @@
 
   </LinearLayout>
 
-  <TextView android:id="@+id/status_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/transparent"
-            android:text="@string/custom_status_msg"
-            android:textColor="@color/status_text"
-            android:paddingBottom="25dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"/>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:background="@color/actionbar_bg"
+        android:id="@+id/info">
+      <TextView android:id="@+id/status_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="@string/custom_status_msg"
+                android:textColor="@color/status_text"
+                android:textSize="12dp"
+                android:textAllCaps="true"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"/>
+    </RelativeLayout>
 
 </merge>

@@ -31,7 +31,9 @@ public final class Intents {
      * Send this intent to open the Barcodes app in scanning mode, find a barcode, and return
      * the results.
      */
-    public static final String ACTION = "com.google.zxing.client.android.ZXSCAN";
+    public static final String ACTION = "com.google.zxing.client.android.SCAN";
+
+    public static final String ZX_ACTION = "me.sudar.zxing.SCAN";
 
     /**
      * By default, sending this will decode all barcodes that we understand. However it
@@ -188,6 +190,7 @@ public final class Intents {
      * that another person can scan the barcode from your screen.
      */
     public static final String ACTION = "com.google.zxing.client.android.ENCODE";
+      public static final String ZX_ACTION = "me.sudar.zxing.ENCODE";
 
     /**
      * The data to encode. Use {@link android.content.Intent#putExtra(String, String)} or

@@ -69,7 +69,7 @@ public final class EncodeActivity extends Activity {
       finish();
     } else {
       String action = intent.getAction();
-      if (Intents.Encode.ACTION.equals(action) || Intent.ACTION_SEND.equals(action)) {
+      if (Intents.Encode.ZX_ACTION.equals(action) || Intents.Encode.ACTION.equals(action) || Intent.ACTION_SEND.equals(action)) {
         setContentView(R.layout.encode);
       } else {
         finish();

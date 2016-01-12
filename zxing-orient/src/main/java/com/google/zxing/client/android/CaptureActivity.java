@@ -23,14 +23,12 @@ import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.camera.CameraManager;
 import com.google.zxing.client.android.clipboard.ClipboardInterface;
-import com.google.zxing.client.android.history.HistoryActivity;
 import com.google.zxing.client.android.history.HistoryItem;
 import com.google.zxing.client.android.history.HistoryManager;
 import com.google.zxing.client.android.result.ResultButtonListener;
 import com.google.zxing.client.android.result.ResultHandler;
 import com.google.zxing.client.android.result.ResultHandlerFactory;
 import com.google.zxing.client.android.result.supplement.SupplementalInfoRetriever;
-import com.google.zxing.client.android.share.ShareActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -49,9 +47,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -89,7 +84,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private static final long DEFAULT_INTENT_RESULT_DURATION_MS = 1500L;
   private static final long BULK_MODE_SCAN_DELAY_MS = 1000L;
 
-  private static final String[] ZXING_URLS = { "http://zxing.appspot.com/scan", "zxing://scan/" };
+  private static final String[] ZXING_URLS = { "http://zxing.appspot.com/scan", "zxing://scan/", "http://www.sudar.me/projects/zxing-orient"};
 
   public static final int HISTORY_REQUEST_CODE = 0x0000bacc;
 
@@ -124,6 +119,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private SharedPreferences prefs;
   private boolean autoFocus;
   private boolean flash;
+  private int rotation;
 
   ViewfinderView getViewfinderView() {
     return viewfinderView;
@@ -169,12 +165,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     // first launch. That led to bugs where the scanning rectangle was the wrong size and partially
     // off screen.
     
-    ////////My additional code begin/////////
-    int rotation = getWindowManager().getDefaultDisplay().getRotation();
-    ////////My additional code end///////////
+    ////////Additional code begin/////////
+    rotation = getWindowManager().getDefaultDisplay().getRotation();
     
     
-    Log.i(TAG,"///////////AutoFocus state : "+autoFocus+"; Flash State : "+flash);
+    Log.i(TAG,"AutoFocus state : "+autoFocus+"; Flash State : "+flash);
     
     cameraManager = new CameraManager(getApplication(),rotation, autoFocus, flash);
     
@@ -191,23 +186,36 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     autoFocusToggleButton = (Button) findViewById(R.id.autofocus_toggle_button);
     flashToggleButton = (Button) findViewById(R.id.flash_toggle_button);
     
-    
-    if(autoFocus) autoFocusToggleButton.setText(R.string.autofocus_on_string);
-    else	autoFocusToggleButton.setText(R.string.autofocus_off_string);
-    
-    if(flash) flashToggleButton.setText(R.string.flash_on_string);
-    else	flashToggleButton.setText(R.string.flash_off_string);
+    if(rotation == Surface.ROTATION_0){
+
+        if (autoFocus) autoFocusToggleButton.setText(R.string.autofocus_on_icon);
+        else autoFocusToggleButton.setText(R.string.autofocus_off_icon);
+
+        if (flash) flashToggleButton.setText(R.string.flash_on_icon);
+        else flashToggleButton.setText(R.string.flash_off_icon);
+
+    }else {
+
+        if (autoFocus) autoFocusToggleButton.setText(R.string.autofocus_on_string);
+        else autoFocusToggleButton.setText(R.string.autofocus_off_string);
+
+        if (flash) flashToggleButton.setText(R.string.flash_on_string);
+        else flashToggleButton.setText(R.string.flash_off_string);
+
+    }
     
     
     autoFocusToggleButton.setOnClickListener(new OnClickListener(){
     	@Override
     	public void onClick(View v){
     		if(autoFocus){
-    			autoFocusToggleButton.setText(R.string.autofocus_off_string);
+                if(rotation == Surface.ROTATION_0) autoFocusToggleButton.setText(R.string.autofocus_off_icon);
+                else autoFocusToggleButton.setText(R.string.autofocus_off_string);
       		  	cameraManager.setAutoFocus(false);
       		  	autoFocus = false;
     		}else{
-    			autoFocusToggleButton.setText(R.string.autofocus_on_string);
+              if(rotation == Surface.ROTATION_0) autoFocusToggleButton.setText(R.string.autofocus_on_icon);
+              else autoFocusToggleButton.setText(R.string.autofocus_on_string);
       		  	cameraManager.setAutoFocus(true);
       		  	autoFocus = true;
     		}
@@ -219,11 +227,13 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		@Override
 		public void onClick(View v) {
 			if(!flash){
-				flashToggleButton.setText(R.string.flash_on_string);
+                if(rotation == Surface.ROTATION_0) flashToggleButton.setText(R.string.flash_on_icon);
+				else flashToggleButton.setText(R.string.flash_on_string);
 				cameraManager.setTorch(true);
 				flash = true;
 			}else{
-				flashToggleButton.setText(R.string.flash_off_string);
+                if(rotation == Surface.ROTATION_0) flashToggleButton.setText(R.string.flash_off_icon);
+                else flashToggleButton.setText(R.string.flash_off_string);
 				cameraManager.setTorch(false);
 				flash = false;
 			}
@@ -231,6 +241,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 		}
     	
     });
+////////Additional code end///////////
 
     //Removed the landscape only mode
     //by commenting this
@@ -273,7 +284,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
       String action = intent.getAction();
       String dataString = intent.getDataString();
 
-      if (Intents.Scan.ACTION.equals(action)) {
+      if (Intents.Scan.ACTION.equals(action) || Intents.Scan.ZX_ACTION.equals(action)) {
 
         // Scan the formats the intent requested, and return the result to the calling activity.
         source = IntentSource.NATIVE_APP_INTENT;
@@ -426,35 +437,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     return super.onKeyDown(keyCode, event);
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater menuInflater = getMenuInflater();
-    menuInflater.inflate(R.menu.capture, menu);
-    return super.onCreateOptionsMenu(menu);
-  }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    Intent intent = new Intent(Intent.ACTION_VIEW);
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    int itemId = item.getItemId();
-	if (itemId == R.id.menu_share) {
-		intent.setClassName(this, ShareActivity.class.getName());
-		startActivity(intent);
-	} else if (itemId == R.id.menu_history) {
-		intent.setClassName(this, HistoryActivity.class.getName());
-		startActivityForResult(intent, HISTORY_REQUEST_CODE);
-	} else if (itemId == R.id.menu_settings) {
-		intent.setClassName(this, PreferencesActivity.class.getName());
-		startActivity(intent);
-	} else if (itemId == R.id.menu_help) {
-		intent.setClassName(this, HelpActivity.class.getName());
-		startActivity(intent);
-	} else {
-		return super.onOptionsItemSelected(item);
-	}
-    return true;
-  }
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -619,7 +602,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     ImageView barcodeImageView = (ImageView) findViewById(R.id.barcode_image_view);
     if (barcode == null) {
       barcodeImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),
-          R.drawable.launcher_icon));
+          R.drawable.ic_launcher));
     } else {
       barcodeImageView.setImageBitmap(barcode);
     }

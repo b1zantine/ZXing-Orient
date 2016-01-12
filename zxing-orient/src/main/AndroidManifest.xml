@@ -69,7 +69,7 @@
             android:configChanges="keyboardHidden"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
-                <action android:name="com.google.zxing.client.android.ZXSCAN" />
+                <action android:name="me.sudar.zxing.SCAN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -77,6 +77,16 @@
                 <action android:name="com.google.zxing.client.android.SCAN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Allow web apps to launch Barcode Scanner by linking to http://www.sudar.me/projects/zxing-orient/scan. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="www.sudar.me"
+                    android:path="/projects/zxing-orient/scan"
+                    android:scheme="http" />
             </intent-filter>
             <!-- Allow web apps to launch Barcode Scanner by linking to http://zxing.appspot.com/scan. -->
             <intent-filter>
@@ -139,6 +149,11 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="me.sudar.zxing.ENCODE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <!-- This allows us to handle the Share button in Contacts. -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -156,44 +171,6 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".book.SearchBookContentsActivity"
-            android:label="@string/sbc_name"
-            android:screenOrientation="sensorLandscape"
-            android:stateNotNeeded="true">
-            <intent-filter>
-                <action android:name="com.google.zxing.client.android.SEARCH_BOOK_CONTENTS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".share.ShareActivity"
-            android:screenOrientation="user"
-            android:stateNotNeeded="true">
-            <intent-filter>
-                <action android:name="com.google.zxing.client.android.SHARE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".history.HistoryActivity"
-            android:label="@string/history_title"
-            android:stateNotNeeded="true" />
-        <activity
-            android:name=".share.BookmarkPickerActivity"
-            android:label="@string/bookmark_picker_name"
-            android:stateNotNeeded="true" />
-        <activity
-            android:name=".share.AppPickerActivity"
-            android:label="@string/app_picker_name"
-            android:stateNotNeeded="true" />
-        <activity
-            android:name=".HelpActivity"
-            android:label="@string/menu_help"
-            android:screenOrientation="user"
-            android:stateNotNeeded="true" />
     </application>
 
 </manifest>

@@ -11,10 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import me.sudar.zxing.ZxingOrient;
+import me.sudar.zxing.ZxingOrientResult;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private TextView resultTextView;
 
     @Override
@@ -38,22 +41,17 @@ public class MainActivity extends AppCompatActivity {
         qrButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent("com.google.zxing.client.android.ZXSCAN");
-
-                intent.putExtra("com.google.zxing.client.android.ZXSCAN.SCAN_MODE", "QR_MODE");
-                startActivityForResult(intent, 0);
+                ZxingOrient integrator = new ZxingOrient(MainActivity.this);
+                integrator.initiateScan();
             }
         });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        if(requestCode == 0){
-            if(resultCode == RESULT_OK){
-                String contents = intent.getStringExtra("SCAN_RESULT");
-                //String result = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                resultTextView.setText(contents);
-                Toast.makeText(getApplicationContext(), "Scan Successful", Toast.LENGTH_SHORT).show();
-            }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, data);
+        if (scanResult != null) {
+            resultTextView.setText(scanResult.getContents());
         }
     }
 

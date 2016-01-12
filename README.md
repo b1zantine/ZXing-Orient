@@ -2,50 +2,57 @@
 
 An Android Library based on [ZXing Library](https://github.com/zxing/zxing) (v.3.1.0) with support for `Portrait Orientation`.
 
-# Setup
-## 1. Provide the gradle dependency
+# Scanning
+
+## Basic Setup
+
+### 1. Provide the gradle dependency
 
 ```gradle
-compile 'me.sudar:zxing-orient:1.0.0@aar'
+compile 'me.sudar:zxing-orient:1.1.0@aar'
 ```
 
-## 2. Add to AndroidManifest.xml
-
-```xml
-<activity
-    android:name="com.google.zxing.client.android.CaptureActivity"
-    android:configChanges="keyboardHidden"
-    android:windowSoftInputMode="stateAlwaysHidden" >
-
-    <intent-filter>
-        <action android:name="com.google.zxing.client.android.ZXSCAN" />
-
-        <category android:name="android.intent.category.DEFAULT" />
-    </intent-filter>
-</activity>
-```
-
-## 3. Create an Intent
+### 2. Create an Intent
 
 ```java
-Intent intent = new Intent("com.google.zxing.client.android.ZXSCAN");
-intent.putExtra("com.google.zxing.client.android.ZXSCAN.SCAN_MODE", "QR_MODE");
+Intent intent = new Intent("me.sudar.zxing.SCAN");
 startActivityForResult(intent, 0);
 ```
 
-## 4. Scan and Get the Result
+### 3. Scan and Get the Result
 
 ```java
-public void onActivityResult(int requestCode, int resultCode, Intent intent){
+@Override
+public void onActivityResult(int requestCode, int resultCode, Intent data){
     if(requestCode == 0){
         if(resultCode == RESULT_OK){
-            String contents = intent.getStringExtra("SCAN_RESULT");
-            Toast.makeText(getApplicationContext(), contents, Toast.LENGTH_SHORT).show();
+            String contents = data.getStringExtra("SCAN_RESULT");
         }
     }
 }
 ```
 
+## Additional Setup
+
+For specific modes:
+```java
+intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+
+intent.putExtra("SCAN_MODE", "ONE_D_MODE");
+
+intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+
+intent.putExtra("SCAN_MODE", "DATA_MATRIX_MODE");
+
+intent.putExtra("SCAN_MODE", "AZTEC_MODE");
+
+intent.putExtra("SCAN_MODE", "PDF417_MODE");
+```
+
+For Scanning comma-separated list of formats
+```java
+intent.putExtra("SCAN_FORMATS", "PDF417_MODE");
+```
 # License
 
 This library is available under the [Apache License, Version 2.0.](https://github.com/SudarAbisheck/ZXing-Orient/blob/master/LICENSE)

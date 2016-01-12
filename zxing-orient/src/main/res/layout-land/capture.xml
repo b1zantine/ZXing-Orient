@@ -26,62 +26,70 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"/>
   
-  <LinearLayout
+  <RelativeLayout
       android:id="@+id/custom_action_bar"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:background="@color/actionbar_bg"
-      android:orientation="horizontal"
-      android:paddingTop="5dp" 
-      android:paddingBottom="5dp" 
       android:paddingRight="5dp" 
       android:paddingLeft="25dp">
 
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentLeft="true"
+          android:layout_centerVertical="true">
       <ImageView
           android:id="@+id/logo_image"
           android:layout_width="36dp"
           android:layout_height="36dp"
           android:gravity="start"
-          android:src="@drawable/launcher_icon"
+          android:src="@drawable/ic_launcher"
           tools:ignore="ContentDescription" />
 
-      <Space
-          android:layout_width="0dp"
-          android:layout_height="match_parent" 
-          android:layout_weight="1"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:paddingLeft="10dp"
+          android:gravity="center_vertical"
+          android:text="@string/app_name"
+          android:textSize="14sp"
+          android:textStyle="bold"
+          android:textColor="@color/actionbar_text"/>
+      </LinearLayout>
 
       <LinearLayout 
           android:layout_width="wrap_content"
-          android:layout_height="fill_parent"
-          android:orientation="horizontal" 
-          android:layout_gravity="end"
-          android:gravity="center">
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_alignParentRight="true"
+          android:gravity="start">
           
-          <Button 
+          <com.mikepenz.iconics.view.IconicsButton
               android:id="@+id/autofocus_toggle_button"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="@string/autofocus_on_string"
-              android:gravity="center"
               android:textSize="14sp"
               android:textColor="@color/actionbar_text"
-              android:paddingRight="10dp"
+              android:paddingRight="30dp"
+              android:paddingEnd="30dp"
               style="?android:attr/buttonBarButtonStyle" />
 
-          <Button
+          <com.mikepenz.iconics.view.IconicsButton
               android:id="@+id/flash_toggle_button"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/flash_off_string" 
-              android:gravity="center"
+              android:text="@string/flash_off_string"
               android:textSize="14sp"
               android:textColor="@color/actionbar_text"
-              android:paddingLeft="10dp"
-              android:paddingRight="20dp"
+              android:paddingRight="30dp"
               style="?android:attr/buttonBarButtonStyle"/>
       </LinearLayout> 
       
-  </LinearLayout> 
+  </RelativeLayout>
 
   <LinearLayout android:id="@+id/result_view"
                 android:orientation="vertical"
@@ -250,13 +258,20 @@
 
   </LinearLayout>
 
-  <TextView android:id="@+id/status_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/transparent"
-            android:text="@string/custom_status_msg"
-            android:textColor="@color/status_text"
-            android:paddingBottom="5dp"/>
-
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:background="@color/actionbar_bg"
+        android:id="@+id/info">
+      <TextView android:id="@+id/status_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="@string/custom_status_msg"
+                android:textColor="@color/status_text"
+                android:textAllCaps="true"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"/>
+    </RelativeLayout>
 </merge>
