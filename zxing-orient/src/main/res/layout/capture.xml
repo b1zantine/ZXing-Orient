@@ -268,8 +268,8 @@
         android:layout_gravity="bottom"
         android:gravity="center"
         android:background="@color/actionbar_bg"
-        android:id="@+id/info">
-      <TextView android:id="@+id/status_view"
+        android:id="@+id/info_box">
+      <TextView android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"

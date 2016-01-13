@@ -1,6 +1,6 @@
 # ZXing Orient
 
-An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with support for `Portrait Orientation`.
+An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with support for `Portrait Orientation` and some cool stuffs.
 
 ## Basic Setup
 
@@ -45,12 +45,12 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
 
     Some Formats include:
     ```java
-    Barcode.PRODUCT_CODE_TYPES // Collection of UPC_A, UPC_E, EAN_8, EAN_13, RSS_14
+    Barcode.PRODUCT_CODE_TYPES /** Collection of UPC_A, UPC_E, EAN_8, EAN_13, RSS_14 **/
     
-    Barcode.ONE_D_CODE_TYPES // Collection of UPC_A, UPC_E, UPC_EAN_EXTENSION, EAN_8, EAN_13, 
-                                     CODABAR, CODE_39, CODE_93, CODE_128, ITF, RSS_14, RSS_EXPANDED
+    Barcode.ONE_D_CODE_TYPES /** Collection of UPC_A, UPC_E, UPC_EAN_EXTENSION, EAN_8, EAN_13, 
+                                     CODABAR, CODE_39, CODE_93, CODE_128, ITF, RSS_14, RSS_EXPANDED **/
     
-    Barcode.TWO_D_CODE_TYPES // Collection of QR_CODE, DATA_MATRIX, PDF_417, AZTEC
+    Barcode.TWO_D_CODE_TYPES /** Collection of QR_CODE, DATA_MATRIX, PDF_417, AZTEC **/
     
     
     Barcode.EAN_8 
@@ -61,7 +61,7 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
     Barcode.DATA_MATRIX ...
     ```
     
-    For all other supported types, take a look at [Barcode.java](#)
+    For all other supported types, take a look at [Barcode.java](https://github.com/SudarAbisheck/ZXing-Orient/blob/master/zxing-orient/src/main/java/me/sudar/zxingorient/Barcode.java)
     
 - Selection of Camera
 

@@ -1,19 +1,3 @@
-/*
- * Copyright 2009 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package me.sudar.zxingorient;
 
 import java.util.Collection;
@@ -21,20 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
-/**
- * @author Sean Owen
- * @author Fred Lin
- * @author Isaac Potoczny-Jones
- * @author Brad Drehmer
- * @author gcstang
- *
- * @author Sudar Abisheck
- */
+import com.google.zxing.client.android.Intents;
+import com.google.zxing.client.android.R;
+
 public class ZxingOrient {
 
     public static final int REQUEST_CODE = 0x0000c0de; // Only use bottom 16 bits
@@ -45,26 +23,56 @@ public class ZxingOrient {
     private final Activity activity;
     private final Fragment fragment;
 
+//    private boolean autoFocus = true;
+//    private boolean flash = false;
+
+    private Integer iconID = null;
+    private Integer toolbarColor = null;
+    private Boolean infoBoxVisibility = null;
+    private String info = null;
+
     private final Map<String,Object> moreExtras = new HashMap<String,Object>(3);
 
-    /**
-     * @param activity {@link Activity} invoking the integration
-     */
+
     public ZxingOrient(Activity activity) {
         this.activity = activity;
         this.fragment = null;
     }
 
-    /**
-     * @param fragment {@link Fragment} invoking the integration.
-     *  {@link #startActivityForResult(Intent, int)} will be called on the {@link Fragment} instead
-     *  of an {@link Activity}
-     */
     public ZxingOrient(Fragment fragment) {
         this.activity = fragment.getActivity();
         this.fragment = fragment;
     }
 
+//    public ZxingOrient setAutoFocus(boolean setting){
+//        this.autoFocus = setting;
+//        return this;
+//    }
+//
+//    public ZxingOrient setFlash(boolean setting){
+//        this.flash= setting;
+//        return this;
+//    }
+//
+//    public ZxingOrient setIcon(int iconID){
+//        this.iconID = iconID;
+//        return this;
+//    }
+//
+//    public ZxingOrient setToolbarColor(String colorString){
+//        this.toolbarColor = Color.parseColor(colorString);
+//        return this;
+//    }
+//
+//    public ZxingOrient showInfoBox(boolean visibility) {
+//        this.infoBoxVisibility =  visibility;
+//        return this;
+//    }
+//
+//    public ZxingOrient setInfo(String info) {
+//        this.info = info;
+//        return this;
+//    }
 
     public Map<String,?> getMoreExtras() {
         return moreExtras;
@@ -91,6 +99,15 @@ public class ZxingOrient {
         Intent intentScan = new Intent(BS_PACKAGE + ".SCAN");
         intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 
+//        PERF issue : The following commented lines increases the camera resume time
+//        intentScan.putExtra(Intents.Scan.AUTO_FOCUS, autoFocus);
+//        intentScan.putExtra((Intents.Scan.FLASH), flash);
+//
+//        if(iconID != null) intentScan.putExtra(Intents.Scan.ICON_ID,iconID);
+//        if(toolbarColor != null) intentScan.putExtra(Intents.Scan.TOOLBAR_COLOR,toolbarColor);
+//        if(infoBoxVisibility != null) intentScan.putExtra(Intents.Scan.INFO_BOX_VISIBILITY,infoBoxVisibility);
+//        if(info != null) intentScan.putExtra(Intents.Scan.INFO,info);
+
         // check which types of codes to scan for
         if (desiredBarcodeFormats != null) {
             // set the desired barcode types
@@ -109,11 +126,6 @@ public class ZxingOrient {
             intentScan.putExtra("SCAN_CAMERA_ID", cameraId);
         }
 
-//        String targetAppPackage = findTargetAppPackage(intentScan);
-//        if (targetAppPackage == null) {
-//            return showDownloadDialog();
-//        }
-//        intentScan.setPackage(targetAppPackage);
         intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intentScan.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         attachMoreExtras(intentScan);
@@ -128,17 +140,7 @@ public class ZxingOrient {
         }
     }
 
-    /**
-     * <p>Call this from your {@link Activity}'s
-     * {@link Activity#onActivityResult(int, int, Intent)} method.</p>
-     *
-     * @param requestCode request code from {@code onActivityResult()}
-     * @param resultCode result code from {@code onActivityResult()}
-     * @param intent {@link Intent} from {@code onActivityResult()}
-     * @return null if the event handled here was not related to this class, or
-     *  else an {@link ZxingOrientResult} containing the result of the scan. If the user cancelled scanning,
-     *  the fields will be null.
-     */
+
     public static ZxingOrientResult parseActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -160,27 +162,12 @@ public class ZxingOrient {
     }
 
 
-    /**
-     * Defaults to type "TEXT_TYPE".
-     *
-     * @param text the text string to encode as a barcode
-     * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise
-     * @see #shareText(CharSequence, CharSequence)
-     */
+
     public final void shareText(CharSequence text) {
         shareText(text, "TEXT_TYPE");
     }
 
-    /**
-     * Shares the given text by encoding it as a barcode, such that another user can
-     * scan the text off the screen of the device.
-     *
-     * @param text the text string to encode as a barcode
-     * @param type type of data to encode. See {@code com.google.zxing.client.android.Contents.Type} constants.
-     * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise
-     */
+
     public final void shareText(CharSequence text, CharSequence type) {
         Intent intent = new Intent();
         intent.addCategory(Intent.CATEGORY_DEFAULT);

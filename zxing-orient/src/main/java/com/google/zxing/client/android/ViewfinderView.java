@@ -75,6 +75,7 @@ public final class ViewfinderView extends View {
     cornerLineColor = resources.getColor(R.color.viewfinder_corner);
   }
 
+
   public void setCameraManager(CameraManager cameraManager) {
     this.cameraManager = cameraManager;
   }
@@ -86,7 +87,7 @@ public final class ViewfinderView extends View {
       return; // not ready yet, early draw before done configuring
     }
     Rect frame = cameraManager.getFramingRect();
-    Rect previewFrame = cameraManager.getFramingRectInPreview();    
+    Rect previewFrame = cameraManager.getFramingRectInPreview();
     if (frame == null || previewFrame == null) {
       return;
     }
@@ -114,7 +115,7 @@ public final class ViewfinderView extends View {
     //BottomRight
     canvas.drawRect(frame.right - 75, frame.bottom, frame.right + 25, frame.bottom + 5, paint); //horizontal
     canvas.drawRect(frame.right, frame.bottom - 75, frame.right + 5, frame.bottom + 25, paint); //vertical
-    
+
     if (resultBitmap != null) {
       // Draw the opaque result bitmap over the scanning rectangle
       paint.setAlpha(CURRENT_POINT_OPACITY);
@@ -127,7 +128,7 @@ public final class ViewfinderView extends View {
       scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
       int middle = frame.height() / 2 + frame.top;
       canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
-      
+
       float scaleX = frame.width() / (float) previewFrame.width();
       float scaleY = frame.height() / (float) previewFrame.height();
 

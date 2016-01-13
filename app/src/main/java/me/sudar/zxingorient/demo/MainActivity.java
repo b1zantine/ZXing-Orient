@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 ZxingOrient integrator = new ZxingOrient(MainActivity.this);
-                integrator.initiateScan(Barcode.MAXICODE);
+                integrator.initiateScan();
             }
         });
     }
