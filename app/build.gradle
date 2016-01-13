@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "me.sudar.zxingorient"
+        applicationId "me.sudar.zxingorient.demo"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

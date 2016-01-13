@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package me.sudar.zxing;
+package me.sudar.zxingorient;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
@@ -30,67 +27,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 /**
- * <p>A utility class which helps ease integration with Barcode Scanner via {@link Intent}s. This is a simple
- * way to invoke barcode scanning and receive the result, without any need to integrate, modify, or learn the
- * project's source code.</p>
- *
- * <h2>Initiating a barcode scan</h2>
- *
- * <p>To integrate, create an instance of {@code ZxingOrient} and call {@link #initiateScan()} and wait
- * for the result in your app.</p>
- *
- * <p>It does require that the Barcode Scanner (or work-alike) application is installed. The
- * {@link #initiateScan()} method will prompt the user to download the application, if needed.</p>
- *
- * <p>There are a few steps to using this integration. First, your {@link Activity} must implement
- * the method {@link Activity#onActivityResult(int, int, Intent)} and include a line of code like this:</p>
- *
- * <pre>{@code
- * public void onActivityResult(int requestCode, int resultCode, Intent intent) {
- *   ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
- *   if (scanResult != null) {
- *     // handle scan result
- *   }
- *   // else continue with any other code you need in the method
- *   ...
- * }
- * }</pre>
- *
- * <p>This is where you will handle a scan result.</p>
- *
- * <p>Second, just call this in response to a user action somewhere to begin the scan process:</p>
- *
- * <pre>{@code
- * ZxingOrient integrator = new ZxingOrient(yourActivity);
- * integrator.initiateScan();
- * }</pre>
- *
- * <p>Note that {@link #initiateScan()} returns an {@link AlertDialog} which is non-null if the
- * user was prompted to download the application. This lets the calling app potentially manage the dialog.
- * In particular, ideally, the app dismisses the dialog if it's still active in its {@link Activity#onPause()}
- * method.</p>
- *
- *
- * <p>Finally, you can use {@link #addExtra(String, Object)} to add more parameters to the Intent used
- * to invoke the scanner. This can be used to set additional options not directly exposed by this
- * simplified API.</p>
- *
- * <p>By default, this will only allow applications that are known to respond to this intent correctly
- * do so..</p>
- *
- * <h2>Sharing text via barcode</h2>
- *
- * <p>To share text, encoded as a QR Code on-screen, similarly, see {@link #shareText(CharSequence)}.</p>
- *
- * <p>Some code, particularly download integration, was contributed from the Anobiit application.</p>
- *
- * <h2>Enabling experimental barcode formats</h2>
- *
- * <p>Some formats are not enabled by default even when scanning with {@link #ALL_CODE_TYPES}, such as
- * PDF417. Use {@link #initiateScan(java.util.Collection)} with
- * a collection containing the names of formats to scan for explicitly, like "PDF_417", to use such
- * formats.</p>
- *
  * @author Sean Owen
  * @author Fred Lin
  * @author Isaac Potoczny-Jones
@@ -105,16 +41,6 @@ public class ZxingOrient {
     private static final String TAG = ZxingOrient.class.getSimpleName();
 
     private static final String BS_PACKAGE = "me.sudar.zxing";
-
-    // supported barcode formats
-    public static final Collection<String> PRODUCT_CODE_TYPES = list("UPC_A", "UPC_E", "EAN_8", "EAN_13", "RSS_14");
-    public static final Collection<String> ONE_D_CODE_TYPES =
-            list("UPC_A", "UPC_E", "EAN_8", "EAN_13", "CODE_39", "CODE_93", "CODE_128",
-                    "ITF", "RSS_14", "RSS_EXPANDED");
-    public static final Collection<String> QR_CODE_TYPES = Collections.singleton("QR_CODE");
-    public static final Collection<String> DATA_MATRIX_TYPES = Collections.singleton("DATA_MATRIX");
-
-    public static final Collection<String> ALL_CODE_TYPES = null;
 
     private final Activity activity;
     private final Fragment fragment;
@@ -148,50 +74,19 @@ public class ZxingOrient {
         moreExtras.put(key, value);
     }
 
-    /**
-     * Initiates a scan for all known barcode types with the default camera.
-     *
-     * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise.
-     */
     public final void initiateScan() {
-        initiateScan(ALL_CODE_TYPES, -1);
+        initiateScan(Barcode.DEFAULT_CODE_TYPES, -1);
     }
 
-    /**
-     * Initiates a scan for all known barcode types with the specified camera.
-     *
-     * @param cameraId camera ID of the camera to use. A negative value means "no preference".
-     * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise.
-     */
     public final void initiateScan(int cameraId) {
-        initiateScan(ALL_CODE_TYPES, cameraId);
+        initiateScan(Barcode.DEFAULT_CODE_TYPES, cameraId);
     }
 
-    /**
-     * Initiates a scan, using the default camera, only for a certain set of barcode types, given as strings corresponding
-     * to their names in ZXing's {@code BarcodeFormat} class like "UPC_A". You can supply constants
-     * like {@link #PRODUCT_CODE_TYPES} for example.
-     *
-     * @param desiredBarcodeFormats names of {@code BarcodeFormat}s to scan for
-     * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise.
-     */
+
     public final void initiateScan(Collection<String> desiredBarcodeFormats) {
         initiateScan(desiredBarcodeFormats, -1);
     }
 
-    /**
-     * Initiates a scan, using the specified camera, only for a certain set of barcode types, given as strings corresponding
-     * to their names in ZXing's {@code BarcodeFormat} class like "UPC_A". You can supply constants
-     * like {@link #PRODUCT_CODE_TYPES} for example.
-     *
-     * @param desiredBarcodeFormats names of {@code BarcodeFormat}s to scan for
-     * @param cameraId camera ID of the camera to use. A negative value means "no preference".
-     * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise
-     */
     public final void initiateScan(Collection<String> desiredBarcodeFormats, int cameraId) {
         Intent intentScan = new Intent(BS_PACKAGE + ".SCAN");
         intentScan.addCategory(Intent.CATEGORY_DEFAULT);
@@ -225,15 +120,6 @@ public class ZxingOrient {
         startActivityForResult(intentScan, REQUEST_CODE);
     }
 
-    /**
-     * Start an activity. This method is defined to allow different methods of activity starting for
-     * newer versions of Android and for compatibility library.
-     *
-     * @param intent Intent to start.
-     * @param code Request code for the activity
-     * @see android.app.Activity#startActivityForResult(Intent, int)
-     * @see android.app.Fragment#startActivityForResult(Intent, int)
-     */
     protected void startActivityForResult(Intent intent, int code) {
         if (fragment == null) {
             activity.startActivityForResult(intent, code);
@@ -309,10 +195,6 @@ public class ZxingOrient {
         } else {
             fragment.startActivity(intent);
         }
-    }
-
-    private static List<String> list(String... values) {
-        return Collections.unmodifiableList(Arrays.asList(values));
     }
 
     private void attachMoreExtras(Intent intent) {

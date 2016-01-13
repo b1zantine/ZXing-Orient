@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.sudar.zxing;
+package me.sudar.zxingorient;
 
 /**
  * <p>Encapsulates the result of a barcode scan invoked through {@link ZxingOrient}.</p>

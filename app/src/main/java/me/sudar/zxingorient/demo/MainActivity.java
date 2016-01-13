@@ -1,4 +1,4 @@
-package me.sudar.zxingorient;
+package me.sudar.zxingorient.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import me.sudar.zxing.ZxingOrient;
-import me.sudar.zxing.ZxingOrientResult;
+import me.sudar.zxingorient.Barcode;
+import me.sudar.zxingorient.R;
+import me.sudar.zxingorient.ZxingOrient;
+import me.sudar.zxingorient.ZxingOrientResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 ZxingOrient integrator = new ZxingOrient(MainActivity.this);
-                integrator.initiateScan();
+                integrator.initiateScan(Barcode.MAXICODE);
             }
         });
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             resultTextView.setText(scanResult.getContents());
         }
