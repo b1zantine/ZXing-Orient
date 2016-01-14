@@ -1,6 +1,9 @@
-# ZXing Orient
+# ZXing Orient  [ ![Download](https://api.bintray.com/packages/sudarabisheck/maven/ZXing-Orient/images/download.svg) ](https://bintray.com/sudarabisheck/maven/ZXing-Orient/_latestVersion)
 
 An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with support for `Portrait Orientation` and some cool stuffs.
+
+## Screenshots
+<img src="https://raw.githubusercontent.com/SudarAbisheck/ZXing-Orient/master/screenshots/screenshot_1.png" alt="Portrait Screenshot" width="30%"/> <img src="https://raw.githubusercontent.com/SudarAbisheck/ZXing-Orient/master/screenshots/screenshot_2.png" alt="Landscape Screenshot" width="50%"/> 
 
 ## Basic Setup
 
