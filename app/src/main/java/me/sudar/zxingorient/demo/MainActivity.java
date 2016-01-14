@@ -1,6 +1,7 @@
 package me.sudar.zxingorient.demo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.devicon_typeface_library.DevIcon;
+import com.mikepenz.iconics.IconicsDrawable;
 
 import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.R;
@@ -94,20 +100,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        toolbar.getMenu()
+                .findItem(R.id.about_icon)
+                .setIcon(new IconicsDrawable(this, DevIcon.Icon.dev_github_plain).actionBar().colorRes(R.color.iconColor));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.about_icon) {
+            new LibsBuilder()
+                    .withFields(R.string.class.getFields())
+                    .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                    .withActivityTitle(getApplication().getString(R.string.title_about))
+                    .withLicenseShown(true)
+                    .withAboutIconShown(true)
+                    .withAboutVersionShown(true)
+                    .withAboutDescription("An Android Library based on <a href='https://github.com/zxing/zxing'>ZXing Library</a> with support for Portrait Orientation and some cool stuffs.")
+                    .start(this);
             return true;
         }
 

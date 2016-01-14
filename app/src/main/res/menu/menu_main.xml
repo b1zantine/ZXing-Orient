@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".demo.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/about_icon"
+        android:title="@string/about"
+        app:showAsAction="always"/>
 </menu>

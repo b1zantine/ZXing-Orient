@@ -7,7 +7,7 @@
     <string name="qr_code">QR Code</string>
     <string name="default_code">Default</string>
     <string name="generate_barcodes">Generate Barcodes</string>
-    <string name="encode_text_hint">Type something here ...</string>
+    <string name="encode_text_hint">Type something here &#8230;</string>
     <string name="scan_barcodes">Scan Barcodes</string>
     <string name="for_more_info">For More Info</string>
     <string name="check_github">Check out the Github Repo !!</string>
@@ -18,4 +18,19 @@
     <string name="share_text">share Text</string>
     <string name="share">share</string>
     <string name="generate_qr">Generate QR Code</string>
+    <string name="title_about">About</string>
+
+    <string name="define_ActionBarSherlock"></string>
+    <string name="library_ActionBarSherlock_author">Sudar Abisheck</string>
+    <string name="library_ActionBarSherlock_authorWebsite">http://www.sudar.me</string>
+    <string name="library_ActionBarSherlock_libraryName">Zxing Orient</string>
+    <string name="library_ActionBarSherlock_libraryDescription">An Android Library based on ZXing Library
+        with support for `Portrait Orientation` and some cool stuffs.</string>
+    <string name="library_ActionBarSherlock_libraryVersion">2.0.0</string>
+    <string name="library_ActionBarSherlock_libraryWebsite">https://github.com/SudarAbisheck/ZXing-Orient</string>
+    <string name="library_ActionBarSherlock_licenseId">apache_2_0</string>
+    <string name="library_ActionBarSherlock_isOpenSource">true</string>
+    <string name="library_ActionBarSherlock_repositoryLink">https://github.com/SudarAbisheck/ZXing-Orient</string>
+    <string name="about">About</string>
+
 </resources>
