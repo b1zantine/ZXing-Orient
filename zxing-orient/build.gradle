@@ -37,6 +37,4 @@ apply from: 'publish.gradle'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.mikepenz:iconics-core:2.5.4@aar'
-    compile 'com.mikepenz:google-material-typeface:2.1.0.1.original@aar'
 }

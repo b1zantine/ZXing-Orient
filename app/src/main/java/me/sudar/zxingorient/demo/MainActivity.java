@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .withLicenseShown(true)
                     .withAboutIconShown(true)
                     .withAboutVersionShown(true)
-                    .withAboutDescription("An Android Library based on <a href='https://github.com/zxing/zxing'>ZXing Library</a> with support for Portrait Orientation and some cool stuffs.")
+                    .withAboutDescription("This is demo app displaying the features of <b>ZXing-Orient</b> library.")
                     .start(this);
             return true;
         }

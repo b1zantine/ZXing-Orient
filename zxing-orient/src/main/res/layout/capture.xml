@@ -71,29 +71,65 @@
           android:layout_alignParentEnd="true"
           android:layout_alignParentRight="true"
           android:gravity="end">
-          
-          <com.mikepenz.iconics.view.IconicsButton
-              android:id="@+id/autofocus_toggle_button"
+
+          <LinearLayout
+              android:id="@+id/autofocus_toggle_group"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/autofocus_on_icon"
-              android:gravity="center"
-              android:textSize="24sp"
-              android:textColor="@color/actionbar_text"
-              android:paddingRight="10dp"
-              style="?android:attr/buttonBarButtonStyle" />
+              android:orientation="horizontal"
+              android:layout_alignParentRight="true"
+              android:gravity="start">
 
-          <com.mikepenz.iconics.view.IconicsButton
-              android:id="@+id/flash_toggle_button"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/flash_off_icon"
-              android:gravity="center"
-              android:textSize="24sp"
-              android:textColor="@color/actionbar_text"
-              android:paddingRight="20dp"
-              style="?android:attr/buttonBarButtonStyle"/>
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+                  <ImageView
+                      android:id="@+id/autofocus_toggle_button"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:clickable="false"
+                      android:src="@drawable/ic_center_focus_strong_white_18dp"
+                      style="?android:attr/buttonBarButtonStyle" />
+                  <TextView
+                      android:visibility="gone"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/autofocus_string"
+                      android:textSize="14sp"
+                      android:textColor="@color/actionbar_text"
+                      android:paddingRight="30dp"
+                      android:paddingEnd="30dp"
+                      android:clickable="false"
+                      style="?android:attr/buttonBarButtonStyle" />
+              </LinearLayout>
 
+              <LinearLayout
+                  android:id="@+id/flash_toggle_group"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+                  <ImageView
+                      android:id="@+id/flash_toggle_button"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:clickable="false"
+                      android:src="@drawable/ic_flash_off_white_18dp"
+                      style="?android:attr/buttonBarButtonStyle" />
+                  <TextView
+                      android:visibility="gone"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/flash_string"
+                      android:textSize="14sp"
+                      android:textColor="@color/actionbar_text"
+                      android:paddingRight="30dp"
+                      android:paddingEnd="30dp"
+                      android:clickable="false"
+                      style="?android:attr/buttonBarButtonStyle" />
+              </LinearLayout>
+
+          </LinearLayout>
       </LinearLayout>
   </RelativeLayout>
 
@@ -276,7 +312,7 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:text="@string/custom_status_msg"
                 android:textColor="@color/status_text"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 android:textAllCaps="true"
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"/>

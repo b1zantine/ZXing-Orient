@@ -139,14 +139,8 @@
     <string name="wifi_changing_network">Requesting connection to network\u2026</string>
 
     <string name="custom_status_msg">Place the BarCode inside the viewfinder</string>
-    <string name="autofocus_on_icon">{gmd_center_focus_strong}</string>
-    <string name="autofocus_off_icon">{gmd_center_focus_weak}</string>
-    <string name="autofocus_on_string">{gmd_center_focus_strong} AUTOFOCUS</string>
-    <string name="autofocus_off_string">{gmd_center_focus_weak} AUTOFOCUS</string>
-    <string name="flash_on_icon">{gmd_flash_on}</string>
-    <string name="flash_off_icon">{gmd_flash_off}</string>
-    <string name="flash_on_string">{gmd_flash_on}  FLASH</string>
-    <string name="flash_off_string">{gmd_flash_off}  FLASH</string>
+    <string name="autofocus_string">AUTOFOCUS</string>
+    <string name="flash_string">FLASH</string>
     <string name="scan_success_string">Scan Successful</string>
     <string name="preferences_flash">Flash</string>
 </resources>

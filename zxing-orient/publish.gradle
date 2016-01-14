@@ -29,7 +29,7 @@ bintray {
     key = properties.getProperty('BINTRAY_KEY')
     pkg {
         repo = 'maven'
-        name = 'ZXing Orient'
+        name = 'ZXing-Orient'
 
         version {
             name = '2.0.0'

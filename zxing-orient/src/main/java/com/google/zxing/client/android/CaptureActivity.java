@@ -58,6 +58,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,8 +115,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     private BeepManager beepManager;
     private AmbientLightManager ambientLightManager;
 
-    private Button autoFocusToggleButton;
-    private Button flashToggleButton;
+    private ImageView autoFocusToggleButton;
+    private ImageView flashToggleButton;
+    private LinearLayout autoFocusToggleGroup;
+    private LinearLayout flashToggleGroup;
     private SharedPreferences prefs;
     private boolean autoFocus;
     private boolean flash;
@@ -177,29 +180,19 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         handler = null;
         lastResult = null;
 
-        autoFocusToggleButton = (Button) findViewById(R.id.autofocus_toggle_button);
-        flashToggleButton = (Button) findViewById(R.id.flash_toggle_button);
+        autoFocusToggleButton = (ImageView) findViewById(R.id.autofocus_toggle_button);
+        flashToggleButton = (ImageView) findViewById(R.id.flash_toggle_button);
+        autoFocusToggleGroup = (LinearLayout) findViewById(R.id.autofocus_toggle_group);
+        flashToggleGroup = (LinearLayout) findViewById(R.id.flash_toggle_group);
 
-        if (rotation == Surface.ROTATION_0) {
+        if (autoFocus) autoFocusToggleButton.setImageResource(R.drawable.ic_center_focus_strong_white_18dp);
+        else autoFocusToggleButton.setImageResource(R.drawable.ic_center_focus_weak_white_18dp);
 
-            if (autoFocus) autoFocusToggleButton.setText(R.string.autofocus_on_icon);
-            else autoFocusToggleButton.setText(R.string.autofocus_off_icon);
-
-            if (flash) flashToggleButton.setText(R.string.flash_on_icon);
-            else flashToggleButton.setText(R.string.flash_off_icon);
-
-        } else {
-
-            if (autoFocus) autoFocusToggleButton.setText(R.string.autofocus_on_string);
-            else autoFocusToggleButton.setText(R.string.autofocus_off_string);
-
-            if (flash) flashToggleButton.setText(R.string.flash_on_string);
-            else flashToggleButton.setText(R.string.flash_off_string);
-
-        }
+        if (flash) flashToggleButton.setImageResource(R.drawable.ic_flash_on_white_18dp);
+        else flashToggleButton.setImageResource(R.drawable.ic_flash_off_white_18dp);
 
 
-        autoFocusToggleButton.setOnClickListener(new OnClickListener() {
+        autoFocusToggleGroup.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (autoFocus) setAutoFocus(false);
@@ -207,7 +200,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             }
         });
 
-        flashToggleButton.setOnClickListener(new OnClickListener() {
+        flashToggleGroup.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (flash) setTorch(false);
@@ -215,6 +208,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             }
 
         });
+
 
         resetStatusView();
 
@@ -801,15 +795,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     private void setAutoFocus(boolean setting) {
         if (setting) {
-            if (rotation == Surface.ROTATION_0)
-                autoFocusToggleButton.setText(R.string.autofocus_on_icon);
-            else autoFocusToggleButton.setText(R.string.autofocus_on_string);
+            autoFocusToggleButton.setImageResource(R.drawable.ic_center_focus_strong_white_18dp);
             cameraManager.setAutoFocus(true);
             autoFocus = true;
-        } else {
-            if (rotation == Surface.ROTATION_0)
-                autoFocusToggleButton.setText(R.string.autofocus_off_icon);
-            else autoFocusToggleButton.setText(R.string.autofocus_off_string);
+        } else {autoFocusToggleButton.setImageResource(R.drawable.ic_center_focus_weak_white_18dp);
             cameraManager.setAutoFocus(false);
             autoFocus = false;
         }
@@ -817,13 +806,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     private void setTorch(boolean setting) {
         if (setting) {
-            if (rotation == Surface.ROTATION_0) flashToggleButton.setText(R.string.flash_on_icon);
-            else flashToggleButton.setText(R.string.flash_on_string);
+            flashToggleButton.setImageResource(R.drawable.ic_flash_on_white_18dp);
             cameraManager.setTorch(true);
             flash = true;
-        } else {
-            if (rotation == Surface.ROTATION_0) flashToggleButton.setText(R.string.flash_off_icon);
-            else flashToggleButton.setText(R.string.flash_off_string);
+        } else {flashToggleButton.setImageResource(R.drawable.ic_flash_off_white_18dp);
             cameraManager.setTorch(false);
             flash = false;
         }
