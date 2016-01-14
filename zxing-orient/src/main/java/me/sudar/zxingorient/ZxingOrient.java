@@ -28,6 +28,7 @@ public class ZxingOrient {
 
     private Integer iconID = null;
     private Integer toolbarColor = null;
+    private Integer infoBoxColor = null;
     private Boolean infoBoxVisibility = null;
     private String info = null;
 
@@ -54,25 +55,30 @@ public class ZxingOrient {
 //        return this;
 //    }
 //
-//    public ZxingOrient setIcon(int iconID){
-//        this.iconID = iconID;
-//        return this;
-//    }
-//
-//    public ZxingOrient setToolbarColor(String colorString){
-//        this.toolbarColor = Color.parseColor(colorString);
-//        return this;
-//    }
-//
-//    public ZxingOrient showInfoBox(boolean visibility) {
-//        this.infoBoxVisibility =  visibility;
-//        return this;
-//    }
-//
-//    public ZxingOrient setInfo(String info) {
-//        this.info = info;
-//        return this;
-//    }
+    public ZxingOrient setIcon(int iconID){
+        this.iconID = iconID;
+        return this;
+    }
+
+    public ZxingOrient setToolbarColor(String colorString){
+        this.toolbarColor = Color.parseColor(colorString);
+        return this;
+    }
+
+    public ZxingOrient setInfoBoxColor(String colorString){
+        this.infoBoxColor = Color.parseColor(colorString);
+        return this;
+    }
+
+    public ZxingOrient showInfoBox(boolean visibility) {
+        this.infoBoxVisibility =  visibility;
+        return this;
+    }
+
+    public ZxingOrient setInfo(String info) {
+        this.info = info;
+        return this;
+    }
 
     public Map<String,?> getMoreExtras() {
         return moreExtras;
@@ -103,10 +109,11 @@ public class ZxingOrient {
 //        intentScan.putExtra(Intents.Scan.AUTO_FOCUS, autoFocus);
 //        intentScan.putExtra((Intents.Scan.FLASH), flash);
 //
-//        if(iconID != null) intentScan.putExtra(Intents.Scan.ICON_ID,iconID);
-//        if(toolbarColor != null) intentScan.putExtra(Intents.Scan.TOOLBAR_COLOR,toolbarColor);
-//        if(infoBoxVisibility != null) intentScan.putExtra(Intents.Scan.INFO_BOX_VISIBILITY,infoBoxVisibility);
-//        if(info != null) intentScan.putExtra(Intents.Scan.INFO,info);
+        if(iconID != null) intentScan.putExtra(Intents.Scan.ICON_ID,iconID);
+        if(toolbarColor != null) intentScan.putExtra(Intents.Scan.TOOLBAR_COLOR,toolbarColor);
+        if(infoBoxColor != null) intentScan.putExtra(Intents.Scan.INFO_BOX_COLOR,infoBoxColor);
+        if(infoBoxVisibility != null) intentScan.putExtra(Intents.Scan.INFO_BOX_VISIBILITY,infoBoxVisibility);
+        if(info != null) intentScan.putExtra(Intents.Scan.INFO,info);
 
         // check which types of codes to scan for
         if (desiredBarcodeFormats != null) {

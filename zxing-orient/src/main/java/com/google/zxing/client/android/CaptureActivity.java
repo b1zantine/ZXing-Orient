@@ -39,6 +39,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -255,11 +256,22 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 //                if (intent.getBooleanExtra(Intents.Scan.FLASH, false)) setTorch(true);
 //                else setTorch(false);
 
-//                findViewById(R.id.logo_image).setBackgroundResource(intent.getIntExtra(Intents.Scan.ICON_ID, R.drawable.ic_launcher));
-//                findViewById(R.id.custom_action_bar).setBackgroundColor(intent.getIntExtra(Intents.Scan.TOOLBAR_COLOR, R.color.actionbar_bg));
-//                if(! intent.getBooleanExtra(Intents.Scan.INFO_BOX_VISIBILITY,true))
-//                    findViewById(R.id.info_box).setVisibility(View.INVISIBLE);
-//                statusView.setText(intent.getStringExtra(Intents.Scan.INFO));
+                ImageView icon = (ImageView) findViewById(R.id.logo_image);
+                icon.setImageResource(intent.getIntExtra(Intents.Scan.ICON_ID, R.drawable.ic_launcher));
+
+                if(intent.hasExtra(Intents.Scan.TOOLBAR_COLOR))
+                    findViewById(R.id.custom_action_bar)
+                            .setBackgroundColor(intent.getIntExtra(Intents.Scan.TOOLBAR_COLOR, R.color.actionbar_bg));
+
+                if(intent.hasExtra(Intents.Scan.INFO_BOX_COLOR))
+                    findViewById(R.id.info_box)
+                            .setBackgroundColor(intent.getIntExtra(Intents.Scan.INFO_BOX_COLOR, R.color.actionbar_bg));
+
+                if(! intent.getBooleanExtra(Intents.Scan.INFO_BOX_VISIBILITY,true))
+                    findViewById(R.id.info_box).setVisibility(View.INVISIBLE);
+
+                if(intent.hasExtra(Intents.Scan.INFO))
+                    statusView.setText(intent.getStringExtra(Intents.Scan.INFO));
 
                 // Scan the formats the intent requested, and return the result to the calling activity.
                 source = IntentSource.NATIVE_APP_INTENT;

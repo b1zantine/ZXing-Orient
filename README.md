@@ -71,6 +71,27 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
     void initiateScan(Collection<String> desiredBarcodeFormats, int cameraId);
     ```
 
+- UI Settings
+
+    ```java
+    ZxingOrient integrator = new ZxingOrient(MainActivity.this);
+    integrator.setIcon(R.drawable.custom_icon)   // Sets the custom icon
+    .setToolbarColor("#AA3F51B5")       // Sets Tool bar Color
+    .setInfoBoxColor("#AA3F51B5")       // Sets Info box color
+    .setInfo("Scan a QR code Image.")   // Sets info message in the info box
+    .initiateScan(Barcode.QR_CODE);
+    
+    new ZxingOrient(Activity.this)
+    .showInfoBox(false) // Doesn't display the info box  
+    .initiateScan();   
+    ```
+
+## Generate QR Codes
+To generate QR codes add this line when necessary
+```java
+new ZxingOrient(thisActivity).shareText("Some Random Text");
+```
+
 # License
 
 This library is available under the [Apache License, Version 2.0.](https://github.com/SudarAbisheck/ZXing-Orient/blob/master/LICENSE)

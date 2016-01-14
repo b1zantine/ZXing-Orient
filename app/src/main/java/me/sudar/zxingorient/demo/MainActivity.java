@@ -6,10 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import me.sudar.zxingorient.Barcode;
@@ -17,10 +21,11 @@ import me.sudar.zxingorient.R;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private TextView resultTextView;
+    private EditText shareEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,30 +34,60 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         resultTextView = (TextView) findViewById(R.id.result_text_view);
-        Button qrButton = (Button)findViewById(R.id.qr_button);
-        qrButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                ZxingOrient integrator = new ZxingOrient(MainActivity.this);
-                integrator.initiateScan();
-            }
-        });
+        shareEditText = (EditText) findViewById(R.id.encodeEditText);
+        findViewById(R.id.button_1).setOnClickListener(this);
+        findViewById(R.id.button_2).setOnClickListener(this);
+        findViewById(R.id.button_3).setOnClickListener(this);
+        findViewById(R.id.button_4).setOnClickListener(this);
+        findViewById(R.id.button_5).setOnClickListener(this);
+
+        TextView textView =(TextView)findViewById(R.id.github_link);
+        textView.setClickable(true);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        String text = "Check out the <a href='https://github.com/SudarAbisheck/ZXing-Orient'>Github Repo !!</a>";
+        textView.setText(Html.fromHtml(text));
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button_1:
+                new ZxingOrient(MainActivity.this).initiateScan();
+                break;
+            case R.id.button_2:
+                new ZxingOrient(MainActivity.this)
+                        .setInfo("QR code Scanner with UI customization")
+                        .setToolbarColor("#c099cc00")
+                        .setInfoBoxColor("#c099cc00")
+                        .initiateScan(Barcode.QR_CODE);
+                break;
+            case R.id.button_3:
+                new ZxingOrient(MainActivity.this)
+                        .setIcon(R.drawable.custom_icon)
+                        .initiateScan(Barcode.ONE_D_CODE_TYPES);
+                break;
+            case R.id.button_4:
+                new ZxingOrient(MainActivity.this)
+                        .setIcon(R.drawable.custom_icon)
+                        .setInfo("Scans 2D barcodes")
+                        .initiateScan(Barcode.TWO_D_CODE_TYPES);
+                break;
+
+            case R.id.button_5:
+                if(shareEditText.getText().length() == 0)
+                    new ZxingOrient(MainActivity.this).shareText("https://github.com/SudarAbisheck/ZXing-Orient");
+                else
+                    new ZxingOrient(MainActivity.this).shareText(shareEditText.getText().toString());
+                break;
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult != null) {
+        if (scanResult != null && scanResult.getContents() != null) {
             resultTextView.setText(scanResult.getContents());
         }
     }
@@ -78,4 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

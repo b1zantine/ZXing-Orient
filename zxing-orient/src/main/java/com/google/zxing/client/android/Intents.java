@@ -32,13 +32,15 @@ public final class Intents {
 //
 //        public static final String FLASH = "me.sudar.zxing.settings.FLASH";
 //
-//        public static final String ICON_ID = "me.sudar.zxing.settings.ICON_ID";
-//
-//        public static final String TOOLBAR_COLOR = "me.sudar.zxing.settings.TOOLBAR_COLOR";
-//
-//        public static final String INFO_BOX_VISIBILITY = "me.sudar.zxing.settings.INFO_BOX_VISIBILITY";
-//
-//        public static final String INFO = "me.sudar.zxing.settings.INFO";
+        public static final String ICON_ID = "me.sudar.zxing.settings.ICON_ID";
+
+        public static final String TOOLBAR_COLOR = "me.sudar.zxing.settings.TOOLBAR_COLOR";
+
+        public static final String INFO_BOX_VISIBILITY = "me.sudar.zxing.settings.INFO_BOX_VISIBILITY";
+
+        public static final String INFO_BOX_COLOR = "me.sudar.zxing.settings.INFO_BOX_COLOR";
+
+        public static final String INFO = "me.sudar.zxing.settings.INFO";
 
         /**
          * Send this intent to open the Barcodes app in scanning mode, find a barcode, and return
