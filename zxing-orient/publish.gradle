@@ -34,7 +34,7 @@ bintray {
         version {
             name = '2.0.0'
             released  = new Date()
-            vcsTag = '2.0.0'
+            vcsTag = 'v2.0.0'
         }
 
         licenses = ['Apache-2.0']
