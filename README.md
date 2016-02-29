@@ -1,4 +1,4 @@
-# ZXing Orient  [ ![Download](https://api.bintray.com/packages/sudarabisheck/maven/ZXing-Orient/images/download.svg) ](https://bintray.com/sudarabisheck/maven/ZXing-Orient/_latestVersion)
+# ZXing Orient  [ ![Download](https://api.bintray.com/packages/sudarabisheck/maven/ZXing-Orient/images/download.svg) ](https://bintray.com/sudarabisheck/maven/ZXing-Orient/_latestVersion)  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ZXing--Orient-green.svg?style=true)](https://android-arsenal.com/details/1/3213)
 
 An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with support for `Portrait Orientation` and some cool stuffs.
 
