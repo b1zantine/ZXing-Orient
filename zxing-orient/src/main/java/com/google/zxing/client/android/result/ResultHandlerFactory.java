@@ -51,8 +51,8 @@ public final class ResultHandlerFactory {
         return new SMSResultHandler(activity, result);
       case CALENDAR:
         return new CalendarResultHandler(activity, result);
-      case ISBN:
-        return new ISBNResultHandler(activity, result, rawResult);
+//      case ISBN:
+//        return new ISBNResultHandler(activity, result, rawResult);
       default:
         return new TextResultHandler(activity, result, rawResult);
     }
