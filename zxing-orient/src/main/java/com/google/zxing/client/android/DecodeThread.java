@@ -65,22 +65,22 @@ final class DecodeThread extends Thread {
     if (decodeFormats == null || decodeFormats.isEmpty()) {
       SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
       decodeFormats = EnumSet.noneOf(BarcodeFormat.class);
-      if (prefs.getBoolean(PreferencesActivity.KEY_DECODE_1D_PRODUCT, true)) {
+      if (prefs.getBoolean(Preferences.KEY_DECODE_1D_PRODUCT, true)) {
         decodeFormats.addAll(DecodeFormatManager.PRODUCT_FORMATS);
       }
-      if (prefs.getBoolean(PreferencesActivity.KEY_DECODE_1D_INDUSTRIAL, true)) {
+      if (prefs.getBoolean(Preferences.KEY_DECODE_1D_INDUSTRIAL, true)) {
         decodeFormats.addAll(DecodeFormatManager.INDUSTRIAL_FORMATS);
       }
-      if (prefs.getBoolean(PreferencesActivity.KEY_DECODE_QR, true)) {
+      if (prefs.getBoolean(Preferences.KEY_DECODE_QR, true)) {
         decodeFormats.addAll(DecodeFormatManager.QR_CODE_FORMATS);
       }
-      if (prefs.getBoolean(PreferencesActivity.KEY_DECODE_DATA_MATRIX, true)) {
+      if (prefs.getBoolean(Preferences.KEY_DECODE_DATA_MATRIX, true)) {
         decodeFormats.addAll(DecodeFormatManager.DATA_MATRIX_FORMATS);
       }
-      if (prefs.getBoolean(PreferencesActivity.KEY_DECODE_AZTEC, false)) {
+      if (prefs.getBoolean(Preferences.KEY_DECODE_AZTEC, false)) {
         decodeFormats.addAll(DecodeFormatManager.AZTEC_FORMATS);
       }
-      if (prefs.getBoolean(PreferencesActivity.KEY_DECODE_PDF417, false)) {
+      if (prefs.getBoolean(Preferences.KEY_DECODE_PDF417, false)) {
         decodeFormats.addAll(DecodeFormatManager.PDF417_FORMATS);
       }
     }

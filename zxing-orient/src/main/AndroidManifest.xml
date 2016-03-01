@@ -128,10 +128,7 @@
                     android:scheme="zxing" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PreferencesActivity"
-            android:label="@string/preferences_name"
-            android:stateNotNeeded="true" />
+
         <activity
             android:name=".encode.EncodeActivity"
             android:stateNotNeeded="true">

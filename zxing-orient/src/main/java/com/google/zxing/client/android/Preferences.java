@@ -1,7 +1,7 @@
 package com.google.zxing.client.android;
 
 
-public final class PreferencesActivity {
+public final class Preferences {
 
     public static final String KEY_DECODE_1D_PRODUCT = "preferences_decode_1D_product";
     public static final String KEY_DECODE_1D_INDUSTRIAL = "preferences_decode_1D_industrial";
