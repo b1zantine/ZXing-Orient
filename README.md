@@ -2,8 +2,11 @@
 
 An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with support for `Portrait Orientation` and some cool stuffs.
 
-## Screenshots
+### Screenshots
 <img src="https://raw.githubusercontent.com/SudarAbisheck/ZXing-Orient/master/screenshots/screenshot_1.png" alt="Portrait Screenshot" width="30%"/> <img src="https://raw.githubusercontent.com/SudarAbisheck/ZXing-Orient/master/screenshots/screenshot_2.png" alt="Landscape Screenshot" width="50%"/> 
+
+### Demo App
+<a href="https://play.google.com/store/apps/details?id=me.sudar.zxingorient.demo&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"><img width="150" alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" /></a>
 
 ## Basic Setup
 
