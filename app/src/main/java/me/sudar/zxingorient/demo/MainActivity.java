@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView resultTextView;
     private EditText shareEditText;
     private static final int REQUEST_CAMERA = 0x00000011;
-    private static final int REQUEST_VIBRATE = 0x00000111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +79,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .initiateScan(Barcode.QR_CODE);
                 break;
             case R.id.button_3:
-                if (ContextCompat.checkSelfPermission(this,Manifest.permission.VIBRATE)
-                        != PackageManager.PERMISSION_GRANTED)
-                    requestVibratePermission();
-                else{
-
                     new ZxingOrient(MainActivity.this)
                             .setIcon(R.drawable.custom_icon)
                             .setVibration(true)
                             .initiateScan(Barcode.ONE_D_CODE_TYPES);
-                }
-
                 break;
             case R.id.button_4:
                 new ZxingOrient(MainActivity.this)
@@ -170,30 +162,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void requestVibratePermission() {
-        Log.i(TAG, "VIBRATE permission has NOT been granted. Requesting permission.");
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.VIBRATE)) {
-            Log.i(TAG,
-                    "Displaying vibrate permission rationale to provide additional context.");
-            Snackbar.make(findViewById(R.id.coordinator_layout), R.string.permission_vibrate_rationale,
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions(MainActivity.this,
-                                    new String[]{Manifest.permission.VIBRATE},
-                                    REQUEST_VIBRATE);
-                        }
-                    })
-                    .show();
-        } else {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.VIBRATE},
-                    REQUEST_VIBRATE);
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -211,14 +179,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     finish();
                 }
-            }
-            break;
-
-            case REQUEST_VIBRATE: {
-                new ZxingOrient(MainActivity.this)
-                        .setIcon(R.drawable.custom_icon)
-                        .setVibration(true)
-                        .initiateScan(Barcode.ONE_D_CODE_TYPES);
             }
             break;
         }

@@ -39,6 +39,8 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
     }
     ```
 
+**Note :** In `API 23` and above, don't forget to request permission for `Manifest.permission.CAMERA` before calling ZXing Orient.
+
 ## Advanced Setup
 
 - Selection of Specific Barcode Types:

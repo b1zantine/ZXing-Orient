@@ -8,8 +8,8 @@ android {
         applicationId "me.sudar.zxingorient.demo"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 200
-        versionName "2.0.0"
+        versionCode 201
+        versionName "2.0.1"
     }
     buildTypes {
         release {
