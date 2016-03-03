@@ -58,7 +58,7 @@ import java.util.Map;
  *
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
- * @author Sudar Abisheck < sudarabisheck@gmail.com >
+ * @author Sudar Abisheck (sudarabisheck@gmail.com)
  */
 public final class CaptureActivity extends Activity implements SurfaceHolder.Callback {
 

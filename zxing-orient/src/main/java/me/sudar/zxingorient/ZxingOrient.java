@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.zxing.client.android.Intents;
-import com.google.zxing.client.android.R;
 
 public class ZxingOrient {
 
