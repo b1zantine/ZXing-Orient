@@ -13,7 +13,7 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
 1. Provide the gradle dependency
 
     ```gradle
-    compile 'me.sudar:zxing-orient:2.0.0@aar'
+    compile 'me.sudar:zxing-orient:2.1.0-beta@aar'
     ```
 
 2. Start the Scanner
@@ -89,6 +89,8 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
     
     new ZxingOrient(Activity.this)
     .showInfoBox(false) // Doesn't display the info box  
+    .setBeep(false)  // Doesn't play beep sound
+    .setVibration(true)  // Enables the vibration
     .initiateScan();   
     ```
 
