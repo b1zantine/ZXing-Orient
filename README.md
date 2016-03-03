@@ -13,7 +13,7 @@ An Android Library based on [ZXing Library](https://github.com/zxing/zxing) with
 1. Provide the gradle dependency
 
     ```gradle
-    compile 'me.sudar:zxing-orient:2.1.0-beta@aar'
+    compile 'me.sudar:zxing-orient:2.1.0@aar'
     ```
 
 2. Start the Scanner
