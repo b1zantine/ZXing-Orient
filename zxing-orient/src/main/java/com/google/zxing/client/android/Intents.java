@@ -31,7 +31,11 @@ public final class Intents {
 //        public static final String AUTO_FOCUS = "me.sudar.zxing.settings.AUTO_FOCUS";
 //
 //        public static final String FLASH = "me.sudar.zxing.settings.FLASH";
-//
+
+        public static final String VIBRATE= "me.sudar.zxing.settings.VIBRATE";
+
+        public static final String BEEP = "me.sudar.zxing.settings.BEEP";
+
         public static final String ICON_ID = "me.sudar.zxing.settings.ICON_ID";
 
         public static final String TOOLBAR_COLOR = "me.sudar.zxing.settings.TOOLBAR_COLOR";

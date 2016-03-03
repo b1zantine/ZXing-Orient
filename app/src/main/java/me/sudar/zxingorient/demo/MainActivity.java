@@ -1,10 +1,13 @@
 package me.sudar.zxingorient.demo;
 
+import android.Manifest;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -13,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = MainActivity.class.getSimpleName();
     private TextView resultTextView;
     private EditText shareEditText;
+    private static final int REQUEST_CAMERA = 0x00000011;
+    private static final int REQUEST_VIBRATE = 0x00000111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,25 +58,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String text = "Check out the <a href='https://github.com/SudarAbisheck/ZXing-Orient'>Github Repo !!</a>";
         textView.setText(Html.fromHtml(text));
 
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+                requestCameraPermission();
+        }
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_1:
-                new ZxingOrient(MainActivity.this).initiateScan();
+                    new ZxingOrient(MainActivity.this).initiateScan();
                 break;
             case R.id.button_2:
                 new ZxingOrient(MainActivity.this)
                         .setInfo("QR code Scanner with UI customization")
                         .setToolbarColor("#c099cc00")
                         .setInfoBoxColor("#c099cc00")
+                        .setBeep(false)
                         .initiateScan(Barcode.QR_CODE);
                 break;
             case R.id.button_3:
-                new ZxingOrient(MainActivity.this)
-                        .setIcon(R.drawable.custom_icon)
-                        .initiateScan(Barcode.ONE_D_CODE_TYPES);
+                if (ContextCompat.checkSelfPermission(this,Manifest.permission.VIBRATE)
+                        != PackageManager.PERMISSION_GRANTED)
+                    requestVibratePermission();
+                else{
+
+                    new ZxingOrient(MainActivity.this)
+                            .setIcon(R.drawable.custom_icon)
+                            .setVibration(true)
+                            .initiateScan(Barcode.ONE_D_CODE_TYPES);
+                }
+
                 break;
             case R.id.button_4:
                 new ZxingOrient(MainActivity.this)
@@ -127,5 +145,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    private void requestCameraPermission() {
+        Log.i(TAG, "CAMERA permission has NOT been granted. Requesting permission.");
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CAMERA)) {
+            Log.i(TAG,
+                    "Displaying camera permission rationale to provide additional context.");
+            Snackbar.make(findViewById(R.id.coordinator_layout), R.string.permission_camera_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    REQUEST_CAMERA);
+                        }
+                    })
+                    .show();
+        } else {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                    REQUEST_CAMERA);
+        }
+    }
+
+    private void requestVibratePermission() {
+        Log.i(TAG, "VIBRATE permission has NOT been granted. Requesting permission.");
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.VIBRATE)) {
+            Log.i(TAG,
+                    "Displaying vibrate permission rationale to provide additional context.");
+            Snackbar.make(findViewById(R.id.coordinator_layout), R.string.permission_vibrate_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[]{Manifest.permission.VIBRATE},
+                                    REQUEST_VIBRATE);
+                        }
+                    })
+                    .show();
+        } else {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.VIBRATE},
+                    REQUEST_VIBRATE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    new ZxingOrient(MainActivity.this).initiateScan();
+
+                } else {
+
+                    finish();
+                }
+            }
+            break;
+
+            case REQUEST_VIBRATE: {
+                new ZxingOrient(MainActivity.this)
+                        .setIcon(R.drawable.custom_icon)
+                        .setVibration(true)
+                        .initiateScan(Barcode.ONE_D_CODE_TYPES);
+            }
+            break;
+        }
+    }
 
 }

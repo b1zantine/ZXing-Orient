@@ -18,12 +18,10 @@ package com.google.zxing.client.android;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Vibrator;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.io.Closeable;
@@ -48,13 +46,12 @@ final class BeepManager implements
   BeepManager(Activity activity) {
     this.activity = activity;
     this.mediaPlayer = null;
-    updatePrefs();
+    updatePrefs(false, true);
   }
 
-  synchronized void updatePrefs() {
-    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-    playBeep = shouldBeep(prefs, activity);
-    vibrate = prefs.getBoolean(Preferences.KEY_VIBRATE, false);
+  synchronized void updatePrefs(boolean vibrate, boolean playBeep) {
+    this.playBeep = shouldBeep(playBeep,activity);
+    this.vibrate = vibrate;
     if (playBeep && mediaPlayer == null) {
       // The volume on STREAM_SYSTEM is not adjustable, and users found it too loud,
       // so we now play on the music stream.
@@ -73,8 +70,7 @@ final class BeepManager implements
     }
   }
 
-  private static boolean shouldBeep(SharedPreferences prefs, Context activity) {
-    boolean shouldPlayBeep = prefs.getBoolean(Preferences.KEY_PLAY_BEEP, true);
+  private static boolean shouldBeep(boolean shouldPlayBeep, Context activity) {
     if (shouldPlayBeep) {
       // See if sound settings overrides this
       AudioManager audioService = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
@@ -122,7 +118,7 @@ final class BeepManager implements
       // possibly media player error, so release and recreate
       mp.release();
       mediaPlayer = null;
-      updatePrefs();
+      updatePrefs(false, true);
     }
     return true;
   }

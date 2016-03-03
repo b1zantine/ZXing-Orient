@@ -20,7 +20,11 @@
     <string name="generate_qr">Generate QR Code</string>
     <string name="title_about">About</string>
 
-    <string name="define_ActionBarSherlock"></string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">This App needs to access Camera to present you with the Demo.</string>
+    <string name="permission_vibrate_rationale">Vibration Permission is required to present you with the Demo.</string>
+
+    <string name="define_ActionBarSherlock"/>
     <string name="library_ActionBarSherlock_author">Sudar Abisheck</string>
     <string name="library_ActionBarSherlock_authorWebsite">http://www.sudar.me</string>
     <string name="library_ActionBarSherlock_libraryName">Zxing Orient</string>

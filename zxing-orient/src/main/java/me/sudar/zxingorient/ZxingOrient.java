@@ -26,6 +26,9 @@ public class ZxingOrient {
 //    private boolean autoFocus = true;
 //    private boolean flash = false;
 
+    private boolean vibrate = false;
+    private boolean playBeep = true;
+
     private Integer iconID = null;
     private Integer toolbarColor = null;
     private Integer infoBoxColor = null;
@@ -54,7 +57,17 @@ public class ZxingOrient {
 //        this.flash= setting;
 //        return this;
 //    }
-//
+
+    public ZxingOrient setVibration(boolean setting){
+        this.vibrate = setting;
+        return this;
+    }
+
+    public ZxingOrient setBeep(boolean setting){
+        this.playBeep= setting;
+        return this;
+    }
+
     public ZxingOrient setIcon(int iconID){
         this.iconID = iconID;
         return this;
@@ -108,7 +121,10 @@ public class ZxingOrient {
 //        PERF issue : The following commented lines increases the camera resume time
 //        intentScan.putExtra(Intents.Scan.AUTO_FOCUS, autoFocus);
 //        intentScan.putExtra((Intents.Scan.FLASH), flash);
-//
+
+        intentScan.putExtra(Intents.Scan.VIBRATE, vibrate);
+        intentScan.putExtra((Intents.Scan.BEEP), playBeep);
+
         if(iconID != null) intentScan.putExtra(Intents.Scan.ICON_ID,iconID);
         if(toolbarColor != null) intentScan.putExtra(Intents.Scan.TOOLBAR_COLOR,toolbarColor);
         if(infoBoxColor != null) intentScan.putExtra(Intents.Scan.INFO_BOX_COLOR,infoBoxColor);

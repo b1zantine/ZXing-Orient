@@ -180,7 +180,6 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             surfaceHolder.addCallback(this);
         }
 
-        beepManager.updatePrefs();
         ambientLightManager.start(cameraManager);
 
         inactivityTimer.onResume();
@@ -202,6 +201,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 //
 //                if (intent.getBooleanExtra(Intents.Scan.FLASH, false)) setTorch(true);
 //                else setTorch(false);
+
+                beepManager.updatePrefs(
+                        intent.getBooleanExtra(Intents.Scan.VIBRATE, false),
+                        intent.getBooleanExtra(Intents.Scan.BEEP, true)
+                );
 
                 ImageView icon = (ImageView) findViewById(R.id.logo_image);
                 icon.setImageResource(intent.getIntExtra(Intents.Scan.ICON_ID, R.drawable.ic_launcher));
