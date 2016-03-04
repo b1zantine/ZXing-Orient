@@ -45,8 +45,7 @@ final class VCardContactEncoder extends ContactEncoder {
                          List<String> urls,
                          String note) {
     StringBuilder newContents = new StringBuilder(100);
-    newContents.append("BEGIN:VCARD").append(TERMINATOR);
-    newContents.append("VERSION:3.0").append(TERMINATOR);
+    newContents.append("BEGIN:VCARD").append(TERMINATOR).append("VERSION:3.0").append(TERMINATOR);
 
     StringBuilder newDisplayContents = new StringBuilder(100);
 

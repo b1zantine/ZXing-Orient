@@ -58,13 +58,12 @@ public class ResultPoint {
 
   @Override
   public final String toString() {
-    StringBuilder result = new StringBuilder(25);
-    result.append('(');
-    result.append(x);
-    result.append(',');
-    result.append(y);
-    result.append(')');
-    return result.toString();
+    return new StringBuilder(25)
+            .append('(')
+            .append(x)
+            .append(',')
+            .append(y)
+            .append(')').toString();
   }
 
   /**

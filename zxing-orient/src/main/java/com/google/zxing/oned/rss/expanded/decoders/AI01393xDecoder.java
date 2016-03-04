@@ -55,9 +55,7 @@ final class AI01393xDecoder extends AI01decoder {
     int lastAIdigit =
         this.getGeneralDecoder().extractNumericValueFromBitArray(HEADER_SIZE + GTIN_SIZE, LAST_DIGIT_SIZE);
 
-    buf.append("(393");
-    buf.append(lastAIdigit);
-    buf.append(')');
+    buf.append("(393").append(lastAIdigit).append(')');
 
     int firstThreeDigits =
         this.getGeneralDecoder().extractNumericValueFromBitArray(HEADER_SIZE + GTIN_SIZE + LAST_DIGIT_SIZE, FIRST_THREE_DIGITS_SIZE);

@@ -61,15 +61,15 @@ public final class QRCode {
   @Override
   public String toString() {
     StringBuilder result = new StringBuilder(200);
-    result.append("<<\n");
-    result.append(" mode: ");
-    result.append(mode);
-    result.append("\n ecLevel: ");
-    result.append(ecLevel);
-    result.append("\n version: ");
-    result.append(version);
-    result.append("\n maskPattern: ");
-    result.append(maskPattern);
+    result.append("<<\n")
+            .append(" mode: ")
+            .append(mode)
+            .append("\n ecLevel: ")
+            .append(ecLevel)
+            .append("\n version: ")
+            .append(version)
+            .append("\n maskPattern: ")
+            .append(maskPattern);
     if (matrix == null) {
       result.append("\n matrix: null\n");
     } else {

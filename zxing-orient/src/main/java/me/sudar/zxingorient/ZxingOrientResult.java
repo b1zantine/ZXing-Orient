@@ -62,12 +62,12 @@ public final class ZxingOrientResult {
     @Override
     public String toString() {
         StringBuilder dialogText = new StringBuilder(100);
-        dialogText.append("Format: ").append(formatName).append('\n');
-        dialogText.append("Contents: ").append(contents).append('\n');
+        dialogText.append("Format: ").append(formatName).append('\n')
+                .append("Contents: ").append(contents).append('\n');
         int rawBytesLength = rawBytes == null ? 0 : rawBytes.length;
-        dialogText.append("Raw bytes: (").append(rawBytesLength).append(" bytes)\n");
-        dialogText.append("Orientation: ").append(orientation).append('\n');
-        dialogText.append("EC level: ").append(errorCorrectionLevel).append('\n');
+        dialogText.append("Raw bytes: (").append(rawBytesLength).append(" bytes)\n")
+                .append("Orientation: ").append(orientation).append('\n')
+                .append("EC level: ").append(errorCorrectionLevel).append('\n');
         return dialogText.toString();
     }
 
