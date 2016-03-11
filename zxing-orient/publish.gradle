@@ -20,7 +20,7 @@ artifacts {
 }
 
 group = 'me.sudar'
-version = '2.1.0'
+version = '2.1.1'
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
@@ -32,9 +32,9 @@ bintray {
         name = 'ZXing-Orient'
 
         version {
-            name = '2.1.0'
+            name = '2.1.1'
             released  = new Date()
-            vcsTag = 'v2.1.0'
+            vcsTag = 'v2.1.1'
         }
 
         licenses = ['Apache-2.0']

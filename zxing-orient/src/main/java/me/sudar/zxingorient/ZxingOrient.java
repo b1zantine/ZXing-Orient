@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,19 +19,20 @@ public class ZxingOrient {
     private static final String BS_PACKAGE = "me.sudar.zxing";
 
     private final Activity activity;
-    private final Fragment fragment;
+    private final android.app.Fragment fragment;
+    private final android.support.v4.app.Fragment supportFragment;
 
 //    private boolean autoFocus = true;
 //    private boolean flash = false;
 
-    private boolean vibrate = false;
-    private boolean playBeep = true;
+    private boolean vibrate;
+    private boolean playBeep;
 
-    private Integer iconID = null;
-    private Integer toolbarColor = null;
-    private Integer infoBoxColor = null;
-    private Boolean infoBoxVisibility = null;
-    private String info = null;
+    private Integer iconID;
+    private Integer toolbarColor;
+    private Integer infoBoxColor;
+    private Boolean infoBoxVisibility;
+    private String info;
 
     private final Map<String,Object> moreExtras = new HashMap<String,Object>(3);
 
@@ -40,11 +40,32 @@ public class ZxingOrient {
     public ZxingOrient(Activity activity) {
         this.activity = activity;
         this.fragment = null;
+        this.supportFragment = null;
+        initialize();
     }
 
-    public ZxingOrient(Fragment fragment) {
+    public ZxingOrient(android.app.Fragment fragment) {
         this.activity = fragment.getActivity();
         this.fragment = fragment;
+        this.supportFragment = null;
+        initialize();
+    }
+
+    public ZxingOrient(android.support.v4.app.Fragment supportFragment) {
+        this.activity = supportFragment.getActivity();
+        this.fragment = null;
+        this.supportFragment = supportFragment;
+        initialize();
+    }
+
+    private void initialize(){
+        vibrate = false;
+        playBeep = true;
+        iconID = null;
+        toolbarColor = null;
+        infoBoxColor = null;
+        infoBoxVisibility = null;
+        info = null;
     }
 
 //    public ZxingOrient setAutoFocus(boolean setting){
@@ -155,10 +176,12 @@ public class ZxingOrient {
     }
 
     protected void startActivityForResult(Intent intent, int code) {
-        if (fragment == null) {
+        if (fragment == null && supportFragment == null) {
             activity.startActivityForResult(intent, code);
-        } else {
+        } else if(supportFragment == null){
             fragment.startActivityForResult(intent, code);
+        } else if(fragment == null){
+            supportFragment.startActivityForResult(intent, code);
         }
     }
 
@@ -199,10 +222,12 @@ public class ZxingOrient {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         attachMoreExtras(intent);
-        if (fragment == null) {
+        if (fragment == null && supportFragment == null) {
             activity.startActivity(intent);
-        } else {
+        } else if(supportFragment == null){
             fragment.startActivity(intent);
+        } else if(fragment == null){
+            supportFragment.startActivity(intent);
         }
     }
 
