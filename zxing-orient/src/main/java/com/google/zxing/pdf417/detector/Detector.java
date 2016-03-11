@@ -291,10 +291,8 @@ public final class Detector {
         isWhite = !isWhite;
       }
     }
-    if (counterPosition == patternLength - 1) {
-      if (patternMatchVariance(counters, pattern, MAX_INDIVIDUAL_VARIANCE) < MAX_AVG_VARIANCE) {
-        return new int[] {patternStart, x - 1};
-      }
+    if (counterPosition == patternLength - 1 && patternMatchVariance(counters, pattern, MAX_INDIVIDUAL_VARIANCE) < MAX_AVG_VARIANCE) {
+      return new int[]{patternStart, x - 1};
     }
     return null;
   }

@@ -127,11 +127,10 @@ public final class StringUtils {
       if (canBeISO88591) {
         if (value > 0x7F && value < 0xA0) {
           canBeISO88591 = false;
-        } else if (value > 0x9F) {
-          if (value < 0xC0 || value == 0xD7 || value == 0xF7) {
-            isoHighOther++;
-          } //else {
-            //isoHighChars++;
+        } else if (value > 0x9F && (value < 0xC0 || value == 0xD7 || value == 0xF7)) {
+          isoHighOther++;
+          //else {
+          //isoHighChars++;
           //}
         } //else {
           //isoLowChars++;
