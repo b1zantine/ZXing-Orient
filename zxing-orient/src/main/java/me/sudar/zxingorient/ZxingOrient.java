@@ -143,7 +143,7 @@ public class ZxingOrient {
 //        intentScan.putExtra((Intents.Scan.FLASH), flash);
 
         intentScan.putExtra(Intents.Scan.VIBRATE, vibrate);
-        intentScan.putExtra((Intents.Scan.BEEP), playBeep);
+        intentScan.putExtra(Intents.Scan.BEEP, playBeep);
 
         if(iconID != null) intentScan.putExtra(Intents.Scan.ICON_ID,iconID);
         if(toolbarColor != null) intentScan.putExtra(Intents.Scan.TOOLBAR_COLOR,toolbarColor);
