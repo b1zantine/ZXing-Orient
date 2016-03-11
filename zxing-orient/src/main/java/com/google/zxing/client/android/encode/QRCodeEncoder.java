@@ -309,6 +309,8 @@ final class QRCodeEncoder {
         }
         break;
       }
+      default:
+        break;
     }
   }
 

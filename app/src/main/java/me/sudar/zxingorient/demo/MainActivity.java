@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 else
                     new ZxingOrient(MainActivity.this).shareText(shareEditText.getText().toString());
                 break;
+            default:
+                break;
         }
     }
 
@@ -181,6 +183,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
             break;
+            default:
+                break;
         }
     }
 

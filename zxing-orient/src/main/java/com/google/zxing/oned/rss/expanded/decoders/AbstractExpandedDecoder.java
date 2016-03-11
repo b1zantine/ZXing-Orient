@@ -67,12 +67,14 @@ public abstract class AbstractExpandedDecoder {
     switch(fourBitEncodationMethod){
       case 4: return new AI013103decoder(information);
       case 5: return new AI01320xDecoder(information);
+      default: break;
     }
 
     int fiveBitEncodationMethod = GeneralAppIdDecoder.extractNumericValueFromBitArray(information, 1, 5);
     switch(fiveBitEncodationMethod){
       case 12: return new AI01392xDecoder(information);
       case 13: return new AI01393xDecoder(information);
+      default: break;
     }
 
     int sevenBitEncodationMethod = GeneralAppIdDecoder.extractNumericValueFromBitArray(information, 1, 7);
@@ -85,6 +87,7 @@ public abstract class AbstractExpandedDecoder {
       case 61: return new AI013x0x1xDecoder(information, "320", "15");
       case 62: return new AI013x0x1xDecoder(information, "310", "17");
       case 63: return new AI013x0x1xDecoder(information, "320", "17");
+      default: break;
     }
 
     throw new IllegalStateException("unknown decoder: " + information);

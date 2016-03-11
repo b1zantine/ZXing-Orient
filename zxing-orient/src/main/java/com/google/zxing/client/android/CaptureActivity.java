@@ -317,6 +317,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             case KeyEvent.KEYCODE_CAMERA:
                 // Handle these events so they don't launch the Camera app
                 return true;
+            default:
+                break;
         }
         return super.onKeyDown(keyCode, event);
     }

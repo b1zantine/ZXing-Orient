@@ -188,6 +188,8 @@ public final class HttpHelper {
               // nevermind
             }
           }
+          default:
+            break;
       }
       return uri;
     } finally {

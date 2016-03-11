@@ -88,6 +88,8 @@ final class DecodedBitStreamParser {
       case 5:
         result.append(getMessage(bytes, 1, 77));
         break;
+      default:
+        break;
     }
     return new DecoderResult(bytes, result.toString(), null, String.valueOf(mode));
   }
