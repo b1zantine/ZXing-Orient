@@ -78,10 +78,8 @@ public final class RSS14Reader extends AbstractRSSReader {
         int rightSize = possibleRightPairs.size();
         for (int j = 0; j < rightSize; j++) {
           Pair right = possibleRightPairs.get(j);
-          if (right.getCount() > 1) {
-            if (checkChecksum(left, right)) {
-              return constructResult(left, right);
-            }
+          if (right.getCount() > 1 && checkChecksum(left, right)) {
+            return constructResult(left, right);
           }
         }
       }

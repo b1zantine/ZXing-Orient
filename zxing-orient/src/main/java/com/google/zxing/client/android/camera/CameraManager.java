@@ -182,33 +182,29 @@ public final class CameraManager {
    * @param newSetting if {@code true}, light should be turned on if currently off. And vice versa.
    */
   public synchronized void setTorch(boolean newSetting) {
-    if (newSetting != configManager.getTorchState(camera)) {
-      if (camera != null) {
+    if (newSetting != configManager.getTorchState(camera) && camera != null) {
 //    	while(camera == null);
 //    	  Toast.makeText(context, "Inside camera if torch", Toast.LENGTH_LONG).show();
-        if (autoFocusManager != null) {
-          autoFocusManager.stop();
-        }
-        configManager.setTorch(camera, newSetting);
-        if (autoFocusManager != null) {
-          autoFocusManager.start();
-        }
-//        return true;
+      if (autoFocusManager != null) {
+        autoFocusManager.stop();
       }
+      configManager.setTorch(camera, newSetting);
+      if (autoFocusManager != null) {
+        autoFocusManager.start();
+      }
+//        return true;
     }
 //    return false;
   }
   
   public synchronized void setAutoFocus(boolean newSetting) {
-		  if (camera != null) {
+    if (camera != null && newSetting != autoFocusRequest) {
 //			  Toast.makeText(context, "Inside camera if af", Toast.LENGTH_LONG).show();
-			  if (newSetting != autoFocusRequest){
-				  stopPreview();
-				  autoFocusRequest = newSetting;
-				  startPreview();
-			  }
+      stopPreview();
+      autoFocusRequest = newSetting;
+      startPreview();
 //			  return true;
-		  }
+    }
 //	  return false;
   }
   
