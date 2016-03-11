@@ -399,7 +399,7 @@ final class PDF417HighLevelEncoder {
     if (count == 1 && startmode == TEXT_COMPACTION) {
       sb.append((char) SHIFT_TO_BYTE);
     } else {
-      boolean sixpack = ((count % 6) == 0);
+      boolean sixpack = (count % 6) == 0;
       if (sixpack) {
         sb.append((char)LATCH_TO_BYTE);
       } else {
