@@ -312,6 +312,8 @@ public final class Code128Reader extends OneDReader {
         case CODE_START_B:
         case CODE_START_C:
           throw FormatException.getFormatInstance();
+        default:
+          break;
       }
 
       switch (codeSet) {
@@ -377,6 +379,8 @@ public final class Code128Reader extends OneDReader {
                 break;
               case CODE_STOP:
                 done = true;
+                break;
+              default:
                 break;
             }
           }
@@ -471,6 +475,8 @@ public final class Code128Reader extends OneDReader {
                 break;
             }
           }
+          break;
+        default:
           break;
       }
 

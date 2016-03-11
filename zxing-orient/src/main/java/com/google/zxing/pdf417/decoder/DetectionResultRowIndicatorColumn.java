@@ -199,6 +199,8 @@ final class DetectionResultRowIndicatorColumn extends DetectionResultColumn {
         case 2:
           barcodeColumnCount.setValue(rowIndicatorValue + 1);
           break;
+        default:
+          break;
       }
     }
     // Maybe we should check if we have ambiguous values?
@@ -250,6 +252,8 @@ final class DetectionResultRowIndicatorColumn extends DetectionResultColumn {
           if (rowIndicatorValue + 1 != barcodeMetadata.getColumnCount()) {
             codewords[codewordRow] = null;
           }
+          break;
+        default:
           break;
       }
     }

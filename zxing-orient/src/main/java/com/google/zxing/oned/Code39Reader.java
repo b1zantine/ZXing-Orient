@@ -309,6 +309,8 @@ public final class Code39Reader extends OneDReader {
               throw FormatException.getFormatInstance();
             }
             break;
+          default:
+            break;
         }
         decoded.append(decodedChar);
         // bump up i again since we read two characters

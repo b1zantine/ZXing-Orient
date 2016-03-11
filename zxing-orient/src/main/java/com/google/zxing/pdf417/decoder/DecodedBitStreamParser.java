@@ -1,4 +1,4 @@
-/*
+2/*
  * Copyright 2009 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -236,6 +236,8 @@ final class DecodedBitStreamParser {
             byteCompactionData[index] = code;
             index++;
             break;
+          default:
+            break;
         }
       }
     }
@@ -393,6 +395,8 @@ final class DecodedBitStreamParser {
               subMode = Mode.ALPHA;
             }
           }
+          break;
+        default:
           break;
       }
       if (ch != 0) {

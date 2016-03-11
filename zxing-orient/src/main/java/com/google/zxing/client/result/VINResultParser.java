@@ -202,6 +202,8 @@ public final class VINResultParser extends ResultParser {
           return "IT";
         }
         break;
+      default:
+        break;
     }
     return null;
   }

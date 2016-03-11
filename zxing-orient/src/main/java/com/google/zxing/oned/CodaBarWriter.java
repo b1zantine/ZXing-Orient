@@ -83,6 +83,8 @@ public final class CodaBarWriter extends OneDimensionalCodeWriter {
           case 'E':
             c = 'D';
             break;
+          default:
+            break;
         }
       }
       int code = 0;
