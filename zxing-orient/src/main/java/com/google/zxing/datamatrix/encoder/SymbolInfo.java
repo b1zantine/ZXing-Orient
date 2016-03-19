@@ -228,13 +228,11 @@ public class SymbolInfo {
 
   @Override
   public final String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(rectangular ? "Rectangular Symbol:" : "Square Symbol:");
-    sb.append(" data region ").append(matrixWidth).append('x').append(matrixHeight);
-    sb.append(", symbol size ").append(getSymbolWidth()).append('x').append(getSymbolHeight());
-    sb.append(", symbol data size ").append(getSymbolDataWidth()).append('x').append(getSymbolDataHeight());
-    sb.append(", codewords ").append(dataCapacity).append('+').append(errorCodewords);
-    return sb.toString();
+    return new StringBuilder().append(rectangular ? "Rectangular Symbol:" : "Square Symbol:")
+            .append(" data region ").append(matrixWidth).append('x').append(matrixHeight)
+            .append(", symbol size ").append(getSymbolWidth()).append('x').append(getSymbolHeight())
+            .append(", symbol data size ").append(getSymbolDataWidth()).append('x').append(getSymbolDataHeight())
+            .append(", codewords ").append(dataCapacity).append('+').append(errorCodewords).toString();
   }
 
 }

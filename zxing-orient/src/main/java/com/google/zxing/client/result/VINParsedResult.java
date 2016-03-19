@@ -90,15 +90,15 @@ public final class VINParsedResult extends ParsedResult {
   @Override
   public String getDisplayResult() {
     StringBuilder result = new StringBuilder(50);
-    result.append(worldManufacturerID).append(' ');
-    result.append(vehicleDescriptorSection).append(' ');
-    result.append(vehicleIdentifierSection).append('\n');
+    result.append(worldManufacturerID).append(' ')
+            .append(vehicleDescriptorSection).append(' ')
+            .append(vehicleIdentifierSection).append('\n');
     if (countryCode != null) {
       result.append(countryCode).append(' ');
     }
-    result.append(modelYear).append(' ');
-    result.append(plantCode).append(' ');
-    result.append(sequentialNumber).append('\n');
+    result.append(modelYear).append(' ')
+            .append(plantCode).append(' ')
+            .append(sequentialNumber).append('\n');
     return result.toString();
   }
 }

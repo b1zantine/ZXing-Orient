@@ -54,9 +54,7 @@ final class AI01392xDecoder extends AI01decoder {
 
     int lastAIdigit =
         this.getGeneralDecoder().extractNumericValueFromBitArray(HEADER_SIZE + GTIN_SIZE, LAST_DIGIT_SIZE);
-    buf.append("(392");
-    buf.append(lastAIdigit);
-    buf.append(')');
+    buf.append("(392").append(lastAIdigit).append(')');
 
     DecodedInformation decodedInformation =
         this.getGeneralDecoder().decodeGeneralPurposeField(HEADER_SIZE + GTIN_SIZE + LAST_DIGIT_SIZE, null);

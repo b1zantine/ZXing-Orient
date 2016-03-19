@@ -663,8 +663,7 @@ public final class PDF417 {
     }
     int n = sourceCodeWords + pad + 1;
     StringBuilder sb = new StringBuilder(n);
-    sb.append((char) n);
-    sb.append(highLevel);
+    sb.append((char) n).append(highLevel);
     for (int i = 0; i < pad; i++) {
       sb.append((char) 900); //PAD characters
     }

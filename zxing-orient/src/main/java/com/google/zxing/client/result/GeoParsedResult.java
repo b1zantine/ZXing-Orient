@@ -36,10 +36,10 @@ public final class GeoParsedResult extends ParsedResult {
 
   public String getGeoURI() {
     StringBuilder result = new StringBuilder();
-    result.append("geo:");
-    result.append(latitude);
-    result.append(',');
-    result.append(longitude);
+    result.append("geo:")
+            .append(latitude)
+            .append(',')
+            .append(longitude);
     if (altitude > 0) {
       result.append(',');
       result.append(altitude);
@@ -82,18 +82,18 @@ public final class GeoParsedResult extends ParsedResult {
   @Override
   public String getDisplayResult() {
     StringBuilder result = new StringBuilder(20);
-    result.append(latitude);
-    result.append(", ");
-    result.append(longitude);
+    result.append(latitude)
+            .append(", ")
+            .append(longitude);
     if (altitude > 0.0) {
-      result.append(", ");
-      result.append(altitude);
-      result.append('m');
+      result.append(", ")
+              .append(altitude)
+              .append('m');
     }
     if (query != null) {
-      result.append(" (");
-      result.append(query);
-      result.append(')');
+      result.append(" (")
+              .append(query)
+              .append(')');
     }
     return result.toString();
   }
