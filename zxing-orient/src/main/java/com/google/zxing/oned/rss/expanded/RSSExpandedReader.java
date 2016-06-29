@@ -118,7 +118,7 @@ public final class RSSExpandedReader extends AbstractRSSReader {
   private final List<ExpandedRow> rows = new ArrayList<>();
   private final int [] startEnd = new int[2];
   //private final int [] currentSequence = new int[LONGEST_SEQUENCE_SIZE];
-  private boolean startFromEven = false;
+  private boolean startFromEven;
 
   @Override
   public Result decodeRow(int rowNumber,
